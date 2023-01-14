@@ -10,9 +10,11 @@
   "author": "Oscar Urselli",
   "license": "MIT",
   "devDependencies": {
+    "@electron/rebuild": "^3.2.10",
     "electron": "^22.0.0"
   },
   "dependencies": {
+    "better-sqlite3": "^8.0.1",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.3",
     "sqlite3": "^5.1.4"

@@ -1,3 +1,4 @@
+// Check validity of C.F.
 function checkCF(cf) {
     let alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let even = {
@@ -38,6 +39,7 @@ var currentYear = currentDate.getFullYear();
 let errorToast = undefined;
 let confirmToast = undefined;
 
+// If C.F. is valid fill some of the fields
 $('#cf').on('input', () => {
     let cf = $('#cf').val();
     let alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -57,11 +59,16 @@ $('#cf').on('input', () => {
         }
 
         $('#day').val(day);
-        $('#month').val(alpha.indexOf(month) + 1);
+        $('#month').val((alpha.indexOf(month) < 9 ? '0' : '') + String(alpha.indexOf(month) + 1));
         $('#year').val(year);
+
+        $('#day').prop('disabled', true);
+        $('#month').prop('disabled', true);
+        $('#sex').prop('disabled', true);
     }
 });
 
+// Check the invalid fields and report them, otherwise ask if sure
 $('#pre-add-user').on('click', () => {
     //let name = $('#name').val();
     //let surname = $('#surname').val();
@@ -104,6 +111,7 @@ $('#pre-add-user').on('click', () => {
     }
 });
 
+// If the user is sure send the data to the main process
 $('#add-user').on('click', async () => {
     const user = {
         name: $('#name').val(),
@@ -113,12 +121,9 @@ $('#add-user').on('click', async () => {
         cf: $('#cf').val(),
         city: $('#city').val(),
         role: $('#role').val(),
-        pic: $('#pic').val()
+        pic: $('#pic')[0].files[0].path
     };
     const res = await window.db.addUser(user);
-    console.log(res);
-});
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    
+    console.log(res);
 });

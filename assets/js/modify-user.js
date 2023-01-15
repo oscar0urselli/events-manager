@@ -32,6 +32,29 @@ function checkCF(cf) {
     }
 }
 
+var uid;
+
+window.addEventListener('load', async (event) => {
+    let user = await window.misc.viewUserInfo(undefined);
+    console.log(user);
+
+    uid = user.id;
+
+    $('#name').val(user.name);
+    $('#surname').val(user.surname);
+    $('#sex').val(user.sex);
+
+    let birthday = user.birthday.split('/');
+    $('#day').val(birthday[0]);
+    $('#month').val(birthday[1]);
+    $('#year').val(birthday[2]);
+    
+    $('#city').val(user.city);
+    $('#cf').val(user.cf);
+    $('#role').val(user.role);
+    $('#pic').val(user.pic);
+});
+
 var currentDate = new Date();
 var currentDay = currentDate.getDate();
 var currentMonth = currentDate.getMonth() + 1;
@@ -69,7 +92,7 @@ $('#cf').on('input', () => {
 });
 
 // Check the invalid fields and report them, otherwise ask if sure
-$('#pre-add-user').on('click', () => {
+$('#pre-modify-user').on('click', () => {
     let sex = $('#sex').val();
     let day = $('#day').val();
     let month = $('#month').val();
@@ -110,13 +133,14 @@ $('#pre-add-user').on('click', () => {
 });
 
 // If the user is sure send the data to the main process
-$('#add-user').on('click', async () => {
+$('#modify-user').on('click', async () => {
     let day = $('#day').val();
     day = (Number(day) < 10 ? '0' : '') + day;
     let month = $('#month').val();
     month = (Number(month) < 10 ? '0' : '') + month;
     
     const user = {
+        id: uid,
         name: $('#name').val(),
         surname: $('#surname').val(),
         sex: $('#sex').val(),
@@ -126,7 +150,7 @@ $('#add-user').on('click', async () => {
         role: $('#role').val(),
         pic: $('#pic')[0].files[0].path
     };
-    const res = await window.db.addUser(user);
+    const res = await window.db.modifyUser(user);
 
     console.log(res);
 });

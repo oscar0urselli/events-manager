@@ -108,7 +108,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="events.html" class="nav-link active">
+                                <a href="events.html" class="nav-link link-dark">
                                     <svg class="bi pe-none me-2" width="16" height="16">
                                         <use xlink:href="#table" />
                                     </svg>
@@ -116,7 +116,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="users.html" class="nav-link link-dark">
+                                <a href="users.html" class="nav-link active">
                                     <svg class="bi pe-none me-2" width="16" height="16">
                                         <use xlink:href="#people-circle" />
                                     </svg>
@@ -129,14 +129,144 @@
                 </div>
                 <div class="col-8">
                     <div class="my-3 p-3 bg-body rounded shadow-lg">
-                        <h2 class="border-bottom pb-2 mb-3" >Eventi</h2>
-                        <button type="button" class="btn btn-primary btn-lg">Aggiungi evento</button>
-                        <button class="btn btn-outline-success btn-lg" type="submit">Cerca evento</button>
+                        <h2 class="border-bottom pb-2 mb-3">Modifica volontario</h2>
+                        <a href="users.html" class="btn btn-outline-danger btn-lg">Torna indietro</a>
+                    </div>
+                    <form class="needs-validation">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div class="col-2 bg-body rounded shadow-lg">
+                                <label class="col-form-label">Codice fiscale:</label>
+                                <input type="text" class="form-control" id="cf" placeholder="Codice fiscale" required>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-4 bg-body rounded shadow-lg">
+                                <label class="col-form-label">Nome:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Nome" required>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-4 bg-body rounded shadow-lg">
+                                <label class="col-form-label">Cognome:</label>
+                                <input type="text" class="form-control" id="surname" placeholder="Cognome" required>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row" style="padding-top: 2vh;">
+                            <div class="col"></div>
+                            <div class="col-3 bg-body rounded shadow-lg">
+                                <div class="row">
+                                    <label class="col-form-label">Data di nascita:</label>
+                                </div>
+                                <div class="row">
+                                    <input type="text" class="col form-control" id="day" placeholder="gg" maxlength="2" required>
+                                    <input type="text" class="col form-control" id="month" placeholder="mm" maxlength="2" required>
+                                    <input type="text" class="col form-control" id="year" placeholder="aaaa" maxlength="4" required>
+                                </div>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-4 bg-body rounded shadow-lg">
+                                <label class="col-form-label">Comune di residenza:</label>
+                                <select class="form-select" id="city" required>
+                                    <option value="undefined" selected>Scegli...</option>
+                                    <option value="Avetrana">Avetrana</option>
+                                    <option value="Carosino">Carosino</option>
+                                    <option value="Castellaneta">Castellaneta</option>
+                                    <option value="Crispiano">Crispiano</option>
+                                    <option value="Faggiano">Faggiano</option>
+                                    <option value="Fragagnano">Fragagnano</option>
+                                    <option value="Ginosa">Ginosa</option>
+                                    <option value="Grottaglie">Grottaglie</option>
+                                    <option value="Laterza">Laterza</option>
+                                    <option value="Leporano">Leporano</option>
+                                    <option value="Lizzano">Lizzano</option>
+                                    <option value="Manduria">Manduria</option>
+                                    <option value="Martina Franca">Martina Franca</option>
+                                    <option value="Maruggio">Maruggio</option>
+                                    <option value="Massafra">Massafra</option>
+                                    <option value="Monteiasi">Monteiasi</option>
+                                    <option value="Montemesola">Montemesola</option>
+                                    <option value="Monteparano">Monteparano</option>
+                                    <option value="Mottola">Mottola</option>
+                                    <option value="Palagianello">Palagianello</option>
+                                    <option value="Palagiano">Palagiano</option>
+                                    <option value="Pulsano">Pulsano</option>
+                                    <option value="Roccaforzata">Roccaforzata</option>
+                                    <option value="San Giorgio Ionico">San Giorgio Ionico</option>
+                                    <option value="San Marzano di San Giuseppe">San Marzano di San Giuseppe</option>
+                                    <option value="Sava">Sava</option>
+                                    <option value="Statte">Statte</option>
+                                    <option value="Taranto">Taranto</option>
+                                    <option value="Torricella">Torricella</option>
+                                </select>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-3 bg-body rounded shadow-lg">
+                                <label class="col-form-label">Sesso:</label>
+                                <select class="form-select" id="sex" required>
+                                    <option value="undefined" selected>Scegli...</option>
+                                    <option value="F">F</option>
+                                    <option value="M">M</option>
+                                </select>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row" style="padding-top: 2vh;">
+                            <div class="col"></div>
+                            <div class="col-4 bg-body rounded shadow-lg">
+                                <label class="col-form-label">Incarico:</label>
+                                <select class="form-select" id="role" required>
+                                    <option value="undefined" selected>Scegli...</option>
+                                    <option value="Volontario">Volontario</option>
+                                    <option value="Barelliere">Barelliere</option>
+                                    <option value="Soccorritore">Soccorritore</option>
+                                    <option value="Assistente">Assistente</option>
+                                    <option value="Coordinatore">Coordinatore</option>
+                                </select>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-3 bg-body rounded shadow-lg">
+                                <label for="formFile" class="form-label">Scegli una foto:</label>
+                                <input class="form-control" type="file" id="pic" accept=".jpg,.jpeg,.png">
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-3 bg-body rounded shadow-lg text-center position-relative">
+                                <button id="pre-modify-user" class="w-100 h-100 position-absolute top-50 start-50 translate-middle btn btn-primary btn-lg" type="button">Modifica</button>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </form>
+                    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+                        <div id="error-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header text-bg-danger">
+                                <strong class="fs-3 me-auto">ERRORE</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                <p id="error-fields" class="fs-4" style="white-space: pre-line;"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-live="assertive" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+                        <div id="confirm-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header text-bg-warning">
+                                <strong class="fs-3 me-auto">ATTENZIONE</strong>
+                            </div>
+                            <div class="toast-body">
+                                <p class="fs-4">Confermi di voler modificare il volontario?</p>
+                                <div class="mt-2 pt-2 border-top">
+                                    <a href="users.html">
+                                        <button id="modify-user" type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast">Modifica</button>
+                                    </a>
+                                    <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="toast">Chiudi</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../js/modify-user.js"></script>
     </body>
 </html>

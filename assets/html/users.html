@@ -129,181 +129,95 @@
                 </div>
                 <div class="col-8">
                     <div class="my-3 p-3 bg-body rounded shadow-lg">
-                        <h2 class="border-bottom pb-2 mb-3" >Volontari</h6>
-                    </div>
-                    <div class="my-3 p-3 bg-body rounded shadow-lg">
+                        <h2 class="border-bottom pb-2 mb-3" >Volontari</h2>
                         <a href="add-user.html" class="btn btn-primary btn-lg">Aggiungi volontario</a>
-                        <button class="btn btn-outline-success btn-lg" type="submit">Cerca volontario</button>
+                        <button id="search-user" class="btn btn-outline-success btn-lg" type="button">Filtra volontari</button>
                     </div>
                     
-                    <div class="row row-cols-1 row-cols-xxl-3 g-4">
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
+                    <div id="users-list" class="row row-cols-1 row-cols-xxl-3 g-4"></div>
+                    
+                    <div aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50"><!-- justify-content-center align-items-center w-100 -->
+                        <div id="confirm-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header text-bg-warning">
+                                <strong class="fs-3 me-auto">ATTENZIONE</strong>
+                            </div>
+                            <div class="toast-body">
+                                <p class="fs-4">Confermi di voler eliminare il volontario?</p>
+                                <div class="mt-2 pt-2 border-top">
+                                    <a href="users.html">
+                                        <button id="del-user" type="button" class="btn btn-danger btn-lg" data-bs-dismiss="toast">Elimina</button>
+                                    </a>
+                                    <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast">Chiudi</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
+                    </div>
+
+                    <div id="filter-selection" class="position-absolute top-50 start-50">
+                        <div class="my-3 p-3 bg-body rounded shadow-lg">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="col-form-label">Sesso:</label>
+                                    <select class="form-select" id="sex">
+                                        <option value="undefined" selected>Qualunque</option>
+                                        <option value="F">F</option>
+                                        <option value="M">M</option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="col-form-label">Incarico:</label>
+                                    <select class="form-select" id="role" required>
+                                        <option value="undefined" selected>Qualunque</option>
+                                        <option value="Volontario">Volontario</option>
+                                        <option value="Barelliere">Barelliere</option>
+                                        <option value="Soccorritore">Soccorritore</option>
+                                        <option value="Assistente">Assistente</option>
+                                        <option value="Coordinatore">Coordinatore</option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="col-form-label">Comune di residenza:</label>
+                                    <select class="form-select" id="city">
+                                        <option value="undefined" selected>Qualunque</option>
+                                        <option value="Avetrana">Avetrana</option>
+                                        <option value="Carosino">Carosino</option>
+                                        <option value="Castellaneta">Castellaneta</option>
+                                        <option value="Crispiano">Crispiano</option>
+                                        <option value="Faggiano">Faggiano</option>
+                                        <option value="Fragagnano">Fragagnano</option>
+                                        <option value="Ginosa">Ginosa</option>
+                                        <option value="Grottaglie">Grottaglie</option>
+                                        <option value="Laterza">Laterza</option>
+                                        <option value="Leporano">Leporano</option>
+                                        <option value="Lizzano">Lizzano</option>
+                                        <option value="Manduria">Manduria</option>
+                                        <option value="Martina Franca">Martina Franca</option>
+                                        <option value="Maruggio">Maruggio</option>
+                                        <option value="Massafra">Massafra</option>
+                                        <option value="Monteiasi">Monteiasi</option>
+                                        <option value="Montemesola">Montemesola</option>
+                                        <option value="Monteparano">Monteparano</option>
+                                        <option value="Mottola">Mottola</option>
+                                        <option value="Palagianello">Palagianello</option>
+                                        <option value="Palagiano">Palagiano</option>
+                                        <option value="Pulsano">Pulsano</option>
+                                        <option value="Roccaforzata">Roccaforzata</option>
+                                        <option value="San Giorgio Ionico">San Giorgio Ionico</option>
+                                        <option value="San Marzano di San Giuseppe">San Marzano di San Giuseppe</option>
+                                        <option value="Sava">Sava</option>
+                                        <option value="Statte">Statte</option>
+                                        <option value="Taranto">Taranto</option>
+                                        <option value="Torricella">Torricella</option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
-                                <img src="../pics/4.jpg" class="card-img-top img-thumbnail">
-                                <div class="card-body">
-                                    <h5 class="card-title">Nome Cognome</h5>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Incarico: Incarico</li>
-                                    <li class="list-group-item">Città: città</li>
-                                    <li class="list-group-item">Data di nascita: gg/mm/aaaa</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="btn btn-primary btn-lg">Modifica</a>
-                                    <a href="#" class="btn btn-danger btn-lg">Elimina</a>
+                            <div class="row p-3">
+                                <div class="col">
+                                    <button id="confirm-search-user" class="btn btn-outline-success btn-lg" type="button">Filtra volontari</button>
                                 </div>
                             </div>
                         </div>

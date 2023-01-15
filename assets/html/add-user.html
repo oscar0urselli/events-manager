@@ -129,7 +129,8 @@
                 </div>
                 <div class="col-8">
                     <div class="my-3 p-3 bg-body rounded shadow-lg">
-                        <h2 class="border-bottom pb-2 mb-3">Creazione volontario</h6>
+                        <h2 class="border-bottom pb-2 mb-3">Creazione volontario</h2>
+                        <a href="users.html" class="btn btn-outline-danger btn-lg">Torna indietro</a>
                     </div>
                     <form class="needs-validation">
                         <div class="row">
@@ -157,9 +158,9 @@
                                     <label class="col-form-label">Data di nascita:</label>
                                 </div>
                                 <div class="row">
-                                    <input type="text" class="col form-control" id="day" placeholder="gg" required>
-                                    <input type="text" class="col form-control" id="month" placeholder="mm" required>
-                                    <input type="text" class="col form-control" id="year" placeholder="aaaa" required>
+                                    <input type="text" class="col form-control" id="day" placeholder="gg" maxlength="2" required>
+                                    <input type="text" class="col form-control" id="month" placeholder="mm" maxlength="2" required>
+                                    <input type="text" class="col form-control" id="year" placeholder="aaaa" maxlength="4" required>
                                 </div>
                             </div>
                             <div class="col"></div>
@@ -167,8 +168,35 @@
                                 <label class="col-form-label">Comune di residenza:</label>
                                 <select class="form-select" id="city" required>
                                     <option value="undefined" selected>Scegli...</option>
-                                    <option value="Taranto">Taranto</option>
+                                    <option value="Avetrana">Avetrana</option>
+                                    <option value="Carosino">Carosino</option>
+                                    <option value="Castellaneta">Castellaneta</option>
+                                    <option value="Crispiano">Crispiano</option>
+                                    <option value="Faggiano">Faggiano</option>
+                                    <option value="Fragagnano">Fragagnano</option>
+                                    <option value="Ginosa">Ginosa</option>
                                     <option value="Grottaglie">Grottaglie</option>
+                                    <option value="Laterza">Laterza</option>
+                                    <option value="Leporano">Leporano</option>
+                                    <option value="Lizzano">Lizzano</option>
+                                    <option value="Manduria">Manduria</option>
+                                    <option value="Martina Franca">Martina Franca</option>
+                                    <option value="Maruggio">Maruggio</option>
+                                    <option value="Massafra">Massafra</option>
+                                    <option value="Monteiasi">Monteiasi</option>
+                                    <option value="Montemesola">Montemesola</option>
+                                    <option value="Monteparano">Monteparano</option>
+                                    <option value="Mottola">Mottola</option>
+                                    <option value="Palagianello">Palagianello</option>
+                                    <option value="Palagiano">Palagiano</option>
+                                    <option value="Pulsano">Pulsano</option>
+                                    <option value="Roccaforzata">Roccaforzata</option>
+                                    <option value="San Giorgio Ionico">San Giorgio Ionico</option>
+                                    <option value="San Marzano di San Giuseppe">San Marzano di San Giuseppe</option>
+                                    <option value="Sava">Sava</option>
+                                    <option value="Statte">Statte</option>
+                                    <option value="Taranto">Taranto</option>
+                                    <option value="Torricella">Torricella</option>
                                 </select>
                             </div>
                             <div class="col"></div>
@@ -188,8 +216,11 @@
                                 <label class="col-form-label">Incarico:</label>
                                 <select class="form-select" id="role" required>
                                     <option value="undefined" selected>Scegli...</option>
-                                    <option value="Tsar">Tsar</option>
-                                    <option value="Leader Supremo">Leader Supremo</option>
+                                    <option value="Volontario">Volontario</option>
+                                    <option value="Barelliere">Barelliere</option>
+                                    <option value="Soccorritore">Soccorritore</option>
+                                    <option value="Assistente">Assistente</option>
+                                    <option value="Coordinatore">Coordinatore</option>
                                 </select>
                             </div>
                             <div class="col"></div>

@@ -7,6 +7,7 @@ const db_op = require('./src/db-op');
 const db = new Database(path.join(__dirname, './test.db'), { verbose: console.log });
 db.pragma('journal_mode = WAL');
 console.log('Connected to the SQlite database.');
+var viewUser = undefined;
 
 
 const createWindow = () => {
@@ -18,6 +19,9 @@ const createWindow = () => {
     
     ipcMain.handle('addUser', (event, user) => { return db_op.addUser(db, user); });
     ipcMain.handle('getUsers', (event) => { return db_op.getUsers(db); });
+    ipcMain.handle('delUser', (event, id) => { return db_op.delUser(db, id); });
+    ipcMain.handle('modifyUser', (event, user) => { return db_op.modifyUser(db, user); });
+    ipcMain.handle('viewUserInfo', (event, user) => { let u = viewUser; viewUser = user; return u;});
     win.loadFile(path.join(__dirname, '/assets/html/home.html'));
 }
 

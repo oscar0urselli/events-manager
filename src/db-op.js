@@ -28,5 +28,19 @@ function getUsers(db) {
     return db.prepare('SELECT * FROM users;').all([]);
 }
 
+function delUser(db, id) {
+    db.prepare('DELETE FROM users WHERE id=?').run([id]);
+    return 'ok';
+}
+
+function modifyUser(db, user) {
+    let sql = 'UPDATE users SET name=?, surname=?, sex=?, birthday=?, cf=?, city=?, role=?, pic=? WHERE id=?;';
+    db.prepare(sql).run([user.name, user.surname, user.sex, user.birthday, user.cf, user.city, user.role, user.pic, user.id]);
+    return 'ok';
+}
+
+
 module.exports.addUser = addUser;
 module.exports.getUsers = getUsers;
+module.exports.delUser = delUser;
+module.exports.modifyUser = modifyUser;

@@ -34,8 +34,15 @@ function delUser(db, id) {
 }
 
 function modifyUser(db, user) {
-    let sql = 'UPDATE users SET name=?, surname=?, sex=?, birthday=?, cf=?, city=?, role=?, pic=? WHERE id=?;';
-    db.prepare(sql).run([user.name, user.surname, user.sex, user.birthday, user.cf, user.city, user.role, user.pic, user.id]);
+    let sql = 'UPDATE users SET name=?, surname=?, sex=?, birthday=?, cf=?, city=?, role=? WHERE id=?;';
+    db.prepare(sql).run([user.name, user.surname, user.sex, user.birthday, user.cf, user.city, user.role, user.id]);
+    
+    if (user.pic !== '') {
+        let img = 'assets/pics/' + String(user.id) + '.jpg';
+        copyFile(user.pic, img);
+        db.prepare('UPDATE users SET pic=? WHERE id=?').run([img, user.id]);
+    }
+    
     return 'ok';
 }
 

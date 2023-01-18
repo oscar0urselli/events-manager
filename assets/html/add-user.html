@@ -127,7 +127,7 @@
                         <hr>
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-8 position-relative">
                     <div class="my-3 p-3 bg-body rounded shadow-lg">
                         <h2 class="border-bottom pb-2 mb-3">Creazione volontario</h2>
                         <a href="users.html" class="btn btn-outline-danger btn-lg">Torna indietro</a>
@@ -235,7 +235,7 @@
                             <div class="col"></div>
                         </div>
                     </form>
-                    <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+                    <div aria-live="polite" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle">
                         <div id="error-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-header text-bg-danger">
                                 <strong class="fs-3 me-auto">ERRORE</strong>
@@ -246,7 +246,7 @@
                             </div>
                         </div>
                     </div>
-                    <div aria-live="assertive" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+                    <div aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle">
                         <div id="confirm-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                             <div class="toast-header text-bg-warning">
                                 <strong class="fs-3 me-auto">ATTENZIONE</strong>
@@ -254,9 +254,7 @@
                             <div class="toast-body">
                                 <p class="fs-4">Confermi di voler aggiungere il volontario?</p>
                                 <div class="mt-2 pt-2 border-top">
-                                    <a href="users.html">
-                                        <button id="add-user" type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast">Aggiungi</button>
-                                    </a>
+                                    <a id="add-user" href="users.html" class="btn btn-primary btn-lg">Aggiungi</a>
                                     <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="toast">Chiudi</button>
                                 </div>
                             </div>

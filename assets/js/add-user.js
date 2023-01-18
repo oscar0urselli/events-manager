@@ -58,8 +58,8 @@ $('#cf').on('input', () => {
             $('#sex').val('M');
         }
 
-        $('#day').val((day < 10 ? '0' : '') + String(day));
-        $('#month').val((alpha.indexOf(month) < 9 ? '0' : '') + String(alpha.indexOf(month) + 1));
+        $('#day').val(String(day));
+        $('#month').val(String(alpha.indexOf(month) + 1));
         $('#year').val(year);
 
         $('#day').prop('disabled', true);
@@ -111,10 +111,8 @@ $('#pre-add-user').on('click', () => {
 
 // If the user is sure send the data to the main process
 $('#add-user').on('click', async () => {
-    let day = $('#day').val();
-    day = (Number(day) < 10 ? '0' : '') + day;
-    let month = $('#month').val();
-    month = (Number(month) < 10 ? '0' : '') + month;
+    let day = Number($('#day').val());
+    let month = Number($('#month').val());
     
     const user = {
         name: $('#name').val(),

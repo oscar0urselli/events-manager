@@ -23,15 +23,17 @@ window.addEventListener('load', async (event) => {
                     <li class="list-group-item">Data di nascita: ${u.birthday}</li>
                 </ul>
                 <div class="card-body">
-                    <a href="modify-user.html">
-                        <button id="modify-user-${u.id}" type="button" class="btn btn-primary btn-lg">Modifica</button>
-                    </a>
+                    <a id="modify-user-${u.id}" href="modify-user.html" class="btn btn-primary btn-lg">Modifica</a>
                     <button type="button" id="del-user-${u.id}" class="btn btn-danger btn-lg">Elimina</button>
                 </div>
             </div>
         </div>
         `);
     });
+});
+
+$('#close-filter').on('click', () => {
+    $('#filter-selection').hide();
 });
 
 
@@ -92,9 +94,7 @@ $('#confirm-search-user').on('click', () => {
                         <li class="list-group-item">Data di nascita: ${u.birthday}</li>
                     </ul>
                     <div class="card-body">
-                        <a href="modify-user.html">
-                            <button id="modify-user-${u.id}" type="button" class="btn btn-primary btn-lg">Modifica</button>
-                        </a>
+                        <a id="modify-user-${u.id}" href="modify-user.html" class="btn btn-primary btn-lg">Modifica</a>
                         <button type="button" id="del-user-${u.id}" class="btn btn-danger btn-lg">Elimina</button>
                     </div>
                 </div>

@@ -129,14 +129,65 @@
                 </div>
                 <div class="col-8">
                     <div class="my-3 p-3 bg-body rounded shadow-lg">
-                        <h2 class="border-bottom pb-2 mb-3" >Eventi</h2>
+                        <h2 class="border-bottom pb-2 mb-3">Eventi</h2>
                         <a href="add-event.html" class="btn btn-primary btn-lg">Aggiungi evento</a>
-                        <button class="btn btn-outline-success btn-lg" type="submit">Cerca evento</button>
+
+                        <button type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#filter-selection">Filtra eventi</button>
+                        <div class="modal fade" id="filter-selection" tabindex="-1" aria-labelledby="filter-selection-title" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="filter-selection-title">Filtra eventi</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label class="col-form-label">Data:</label>
+                                        <input type="date" class="form-control" id="start_date">
+
+                                        <label class="col-form-label">Tipo di ricerca della data:</label>
+                                        <select class="form-select" id="date-search-type">
+                                            <option value="undefined" selected>Qualunque</option>
+                                            <option value="1">Precedente</option>
+                                            <option value="2">Successivo</option>
+                                        </select>
+
+                                        <label class="col-form-label">Stato:</label>
+                                        <select class="form-select" id="status">
+                                            <option value="undefined" selected>Qualunque</option>
+                                            <option value="1">In corso</option>
+                                            <option value="2">Terminato</option>
+                                            <option value="3">Prossimamente</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="confirm-search-event" class="w-100 btn btn-outline-success btn-lg" type="button" data-bs-dismiss="modal">Filtra eventi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="events-list" class="row row-cols-1 row-cols-xxl-3 g-4"></div>
+
+                    <div aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle"><!-- justify-content-center align-items-center w-100 -->
+                        <div id="confirm-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header text-bg-warning">
+                                <strong class="fs-3 me-auto">ATTENZIONE</strong>
+                            </div>
+                            <div class="toast-body">
+                                <p class="fs-4">Confermi di voler eliminare l'evento?</p>
+                                <div class="mt-2 pt-2 border-top">
+                                    <a id="del-event" href="users.html" class="btn btn-danger btn-lg">Elimina</a>
+                                    <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast">Chiudi</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="../js/get-events.js"></script>
     </body>
 </html>

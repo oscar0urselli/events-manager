@@ -1,13 +1,12 @@
 var users;
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    $('#filter-selection').hide();
+    
 });
 
 window.addEventListener('load', async (event) => { 
     users = await window.db.getUsers();
 
-    console.log(users);
     users.forEach((u) => {
         $('#users-list').append(`
         <div id="user-${u.id}" class="col">
@@ -31,11 +30,6 @@ window.addEventListener('load', async (event) => {
         `);
     });
 });
-
-$('#close-filter').on('click', () => {
-    $('#filter-selection').hide();
-});
-
 
 var uid = null;
 var warningToast = undefined;
@@ -64,10 +58,6 @@ $('#del-user').on('click', async () => {
         const res = await window.db.delUser(uid);
         console.log(res);
     }
-});
-
-$('#search-user').on('click', () => {
-    $('#filter-selection').show();
 });
 
 $('#confirm-search-user').on('click', () => {
@@ -102,6 +92,4 @@ $('#confirm-search-user').on('click', () => {
             `);
         }
     });
-
-    $('#filter-selection').hide();
 });

@@ -131,7 +131,73 @@
                     <div class="my-3 p-3 bg-body rounded shadow-lg">
                         <h2 class="border-bottom pb-2 mb-3" >Volontari</h2>
                         <a href="add-user.html" class="btn btn-primary btn-lg">Aggiungi volontario</a>
-                        <button id="search-user" class="btn btn-outline-success btn-lg" type="button">Filtra volontari</button>
+                        
+                        <button type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#filter-selection">Filtra volontari</button>
+                        <div class="modal fade" id="filter-selection" tabindex="-1" aria-labelledby="filter-selection-title" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="filter-selection-title">Filtra volontari</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <label class="col-form-label">Sesso:</label>
+                                        <select class="form-select" id="sex">
+                                            <option value="undefined" selected>Qualunque</option>
+                                            <option value="F">F</option>
+                                            <option value="M">M</option>
+                                        </select>
+
+                                        <label class="col-form-label">Incarico:</label>
+                                        <select class="form-select" id="role" required>
+                                            <option value="undefined" selected>Qualunque</option>
+                                            <option value="Volontario">Volontario</option>
+                                            <option value="Barelliere">Barelliere</option>
+                                            <option value="Soccorritore">Soccorritore</option>
+                                            <option value="Assistente">Assistente</option>
+                                            <option value="Coordinatore">Coordinatore</option>
+                                        </select>
+
+                                        <label class="col-form-label">Comune di residenza:</label>
+                                        <select class="form-select" id="city">
+                                            <option value="undefined" selected>Qualunque</option>
+                                            <option value="Avetrana">Avetrana</option>
+                                            <option value="Carosino">Carosino</option>
+                                            <option value="Castellaneta">Castellaneta</option>
+                                            <option value="Crispiano">Crispiano</option>
+                                            <option value="Faggiano">Faggiano</option>
+                                            <option value="Fragagnano">Fragagnano</option>
+                                            <option value="Ginosa">Ginosa</option>
+                                            <option value="Grottaglie">Grottaglie</option>
+                                            <option value="Laterza">Laterza</option>
+                                            <option value="Leporano">Leporano</option>
+                                            <option value="Lizzano">Lizzano</option>
+                                            <option value="Manduria">Manduria</option>
+                                            <option value="Martina Franca">Martina Franca</option>
+                                            <option value="Maruggio">Maruggio</option>
+                                            <option value="Massafra">Massafra</option>
+                                            <option value="Monteiasi">Monteiasi</option>
+                                            <option value="Montemesola">Montemesola</option>
+                                            <option value="Monteparano">Monteparano</option>
+                                            <option value="Mottola">Mottola</option>
+                                            <option value="Palagianello">Palagianello</option>
+                                            <option value="Palagiano">Palagiano</option>
+                                            <option value="Pulsano">Pulsano</option>
+                                            <option value="Roccaforzata">Roccaforzata</option>
+                                            <option value="San Giorgio Ionico">San Giorgio Ionico</option>
+                                            <option value="San Marzano di San Giuseppe">San Marzano di San Giuseppe</option>
+                                            <option value="Sava">Sava</option>
+                                            <option value="Statte">Statte</option>
+                                            <option value="Taranto">Taranto</option>
+                                            <option value="Torricella">Torricella</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="confirm-search-user" class="w-100 btn btn-outline-success btn-lg" type="button" data-bs-dismiss="modal">Filtra volontari</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div id="users-list" class="row row-cols-1 row-cols-xxl-3 g-4"></div>
@@ -146,77 +212,6 @@
                                 <div class="mt-2 pt-2 border-top">
                                     <a id="del-user" href="users.html" class="btn btn-danger btn-lg">Elimina</a>
                                     <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast">Chiudi</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="filter-selection" class="position-absolute top-50 start-50 translate-middle">
-                        <div class="position-relative my-3 p-3 bg-body rounded shadow-lg">
-                            <button id="close-filter" type="button" class="position-absolute top-0 end-0 btn-close" aria-label="Close"></button>
-                            <div class="row">
-                                <div class="col">
-                                    <label class="col-form-label">Sesso:</label>
-                                    <select class="form-select" id="sex">
-                                        <option value="undefined" selected>Qualunque</option>
-                                        <option value="F">F</option>
-                                        <option value="M">M</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label class="col-form-label">Incarico:</label>
-                                    <select class="form-select" id="role" required>
-                                        <option value="undefined" selected>Qualunque</option>
-                                        <option value="Volontario">Volontario</option>
-                                        <option value="Barelliere">Barelliere</option>
-                                        <option value="Soccorritore">Soccorritore</option>
-                                        <option value="Assistente">Assistente</option>
-                                        <option value="Coordinatore">Coordinatore</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label class="col-form-label">Comune di residenza:</label>
-                                    <select class="form-select" id="city">
-                                        <option value="undefined" selected>Qualunque</option>
-                                        <option value="Avetrana">Avetrana</option>
-                                        <option value="Carosino">Carosino</option>
-                                        <option value="Castellaneta">Castellaneta</option>
-                                        <option value="Crispiano">Crispiano</option>
-                                        <option value="Faggiano">Faggiano</option>
-                                        <option value="Fragagnano">Fragagnano</option>
-                                        <option value="Ginosa">Ginosa</option>
-                                        <option value="Grottaglie">Grottaglie</option>
-                                        <option value="Laterza">Laterza</option>
-                                        <option value="Leporano">Leporano</option>
-                                        <option value="Lizzano">Lizzano</option>
-                                        <option value="Manduria">Manduria</option>
-                                        <option value="Martina Franca">Martina Franca</option>
-                                        <option value="Maruggio">Maruggio</option>
-                                        <option value="Massafra">Massafra</option>
-                                        <option value="Monteiasi">Monteiasi</option>
-                                        <option value="Montemesola">Montemesola</option>
-                                        <option value="Monteparano">Monteparano</option>
-                                        <option value="Mottola">Mottola</option>
-                                        <option value="Palagianello">Palagianello</option>
-                                        <option value="Palagiano">Palagiano</option>
-                                        <option value="Pulsano">Pulsano</option>
-                                        <option value="Roccaforzata">Roccaforzata</option>
-                                        <option value="San Giorgio Ionico">San Giorgio Ionico</option>
-                                        <option value="San Marzano di San Giuseppe">San Marzano di San Giuseppe</option>
-                                        <option value="Sava">Sava</option>
-                                        <option value="Statte">Statte</option>
-                                        <option value="Taranto">Taranto</option>
-                                        <option value="Torricella">Torricella</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row p-3">
-                                <div class="col">
-                                    <button id="confirm-search-user" class="w-100 btn btn-outline-success btn-lg" type="button">Filtra volontari</button>
                                 </div>
                             </div>
                         </div>

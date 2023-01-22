@@ -158,9 +158,9 @@
                                     <label class="col-form-label">Data di nascita:</label>
                                 </div>
                                 <div class="row">
-                                    <input type="text" class="col form-control" id="day" placeholder="gg" maxlength="2" required>
-                                    <input type="text" class="col form-control" id="month" placeholder="mm" maxlength="2" required>
-                                    <input type="text" class="col form-control" id="year" placeholder="aaaa" maxlength="4" required>
+                                    <input type="number" class="col form-control" id="day" placeholder="gg" min="1" max="31" required>
+                                    <input type="number" class="col form-control" id="month" placeholder="mm" min="1" max="12" required>
+                                    <input type="number" class="col form-control" id="year" placeholder="aaaa" min="1900" max="3000" required>
                                 </div>
                             </div>
                             <div class="col"></div>

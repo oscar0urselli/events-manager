@@ -47,7 +47,23 @@ function modifyUser(db, user) {
 }
 
 
+function addEvent(db, event) {
+    let sql = 'INSERT INTO events (name, description, notes, start_datetime, end_datetime, site, users) VALUES (?, ?, ?, ?, ?, ?, ?);';
+    db.prepare(sql).run([event.name, event.description, event.notes, event.start_datetime, event.end_datetime, event.site, event.users]);
+
+    return 'ok';
+}
+
+function getEvents(db) {
+    return db.prepare('SELECT * FROM events;').all([]);
+}
+
+
+
 module.exports.addUser = addUser;
 module.exports.getUsers = getUsers;
 module.exports.delUser = delUser;
 module.exports.modifyUser = modifyUser;
+
+module.exports.addEvent = addEvent;
+module.exports.getEvents = getEvents;

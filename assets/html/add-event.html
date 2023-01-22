@@ -130,7 +130,7 @@
                 <div class="col-8 position-relative">
                     <div class="my-3 p-3 bg-body rounded shadow-lg">
                         <h2 class="border-bottom pb-2 mb-3">Creazione evento</h2>
-                        <a href="users.html" class="btn btn-outline-danger btn-lg">Torna indietro</a>
+                        <a href="events.html" class="btn btn-outline-danger btn-lg">Torna indietro</a>
                     </div>
                     <form class="needs-validation">
                         <div class="row">
@@ -142,7 +142,7 @@
                             <div class="col"></div>
                             <div class="col-7 bg-body rounded shadow-lg">
                                 <label class="col-form-label">Descrizione:</label>
-                                <textarea type="text" class="form-control" id="description" rows="5" placeholder="Descrizione" required></textarea>
+                                <textarea type="text" class="form-control" id="description" rows="5" placeholder="Descrizione"></textarea>
                             </div>
                             <div class="col"></div>
                         </div>
@@ -173,24 +173,50 @@
                             <div class="col"></div>
                             <dic class="col-4 bg-body rounded shadow-lg">
                                 <label class="col-form-label">Luogo:</label>
-                                <textarea type="text" class="form-control" id="notes" rows="5" placeholder="Luogo" required></textarea>
+                                <textarea type="text" class="form-control" id="site" rows="5" placeholder="Luogo" required></textarea>
                             </dic>
                             <div class="col"></div>
                             <div class="col-7 bg-body rounded shadow-lg">
                                 <label class="col-form-label">Note:</label>
-                                <textarea type="text" class="form-control" id="notes" rows="5" placeholder="Note" required></textarea>
+                                <textarea type="text" class="form-control" id="notes" rows="5" placeholder="Note"></textarea>
                             </div>
                             <div class="col"></div>
                         </div>
-                        <div class="row" style="padding-top: 2vh;">
-                             
+                        <div class="row" style="padding-top: 5vh;">
+                            <div class="col-1"></div>
+                            <div id="add-users-btn-field" class="col">
+                                <div data-bs-trigger="hover" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Per poter scegliere i volontari bisogna prima impostare data e ora di inizio e fine evento.">
+                                    <button id="add-users" class="w-100 btn btn-success btn-lg" type="button" disabled>Aggiungi partecipanti</button>
+                                </div>
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row" style="padding-top: 3vh;">
+                            <div class="col-1"></div>
+                            <div class="col-10 bg-body rounded shadow-lg text-center">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Nome</th>
+                                            <th scope="col">Cognome</th>
+                                            <th scope="col">Codice fiscale</th>
+                                            <th scope="col">Città</th>
+                                            <th scope="col">Incarico</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="added-users-table" class="table-group-divider"></tbody>
+                                </table>
+                            </div>
+                            <div class="col-1"></div>
                         </div>
                         <div class="row" style="padding-top: 2vh;">
-                            <div class="col"></div>
-                            <div class="col bg-body rounded shadow-lg text-center">
-                                <button id="pre-add-user" class="btn btn-primary btn-lg" type="button">Aggiungi</button>
+                            <div class="col-1"></div>
+                            <div class="col pt-3 pb-5">
+                                <button id="pre-add-event" class="w-100 btn btn-primary btn-lg" type="button">Crea</button>
                             </div>
-                            <div class="col"></div>
+                            <div class="col-1"></div>
                         </div>
                     </form>
                     <div aria-live="polite" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle">
@@ -210,10 +236,100 @@
                                 <strong class="fs-3 me-auto">ATTENZIONE</strong>
                             </div>
                             <div class="toast-body">
-                                <p class="fs-4">Confermi di voler aggiungere l'evento?</p>
+                                <p class="fs-4">Confermi di voler creare l'evento?</p>
                                 <div class="mt-2 pt-2 border-top">
-                                    <a id="add-user" href="users.html" class="btn btn-primary btn-lg">Aggiungi</a>
+                                    <a id="add-event" href="events.html" class="btn btn-primary btn-lg">Crea</a>
                                     <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="toast">Chiudi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="filter-selection" class="card position-absolute top-50 start-50 translate-middle" style="width: 60rem;">
+                        <div class="my-3 p-3 card-body position-relative">
+                            <button id="close-filter-selection" type="button" class="px-4 position-absolute top-0 end-0 btn-close" aria-label="Close"></button>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="col-form-label">Sesso:</label>
+                                    <select class="form-select" id="sex">
+                                        <option value="undefined" selected>Qualunque</option>
+                                        <option value="F">F</option>
+                                        <option value="M">M</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="col-form-label">Incarico:</label>
+                                    <select class="form-select" id="role" required>
+                                        <option value="undefined" selected>Qualunque</option>
+                                        <option value="Volontario">Volontario</option>
+                                        <option value="Barelliere">Barelliere</option>
+                                        <option value="Soccorritore">Soccorritore</option>
+                                        <option value="Assistente">Assistente</option>
+                                        <option value="Coordinatore">Coordinatore</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="col-form-label">Comune di residenza:</label>
+                                    <select class="form-select" id="city">
+                                        <option value="undefined" selected>Qualunque</option>
+                                        <option value="Avetrana">Avetrana</option>
+                                        <option value="Carosino">Carosino</option>
+                                        <option value="Castellaneta">Castellaneta</option>
+                                        <option value="Crispiano">Crispiano</option>
+                                        <option value="Faggiano">Faggiano</option>
+                                        <option value="Fragagnano">Fragagnano</option>
+                                        <option value="Ginosa">Ginosa</option>
+                                        <option value="Grottaglie">Grottaglie</option>
+                                        <option value="Laterza">Laterza</option>
+                                        <option value="Leporano">Leporano</option>
+                                        <option value="Lizzano">Lizzano</option>
+                                        <option value="Manduria">Manduria</option>
+                                        <option value="Martina Franca">Martina Franca</option>
+                                        <option value="Maruggio">Maruggio</option>
+                                        <option value="Massafra">Massafra</option>
+                                        <option value="Monteiasi">Monteiasi</option>
+                                        <option value="Montemesola">Montemesola</option>
+                                        <option value="Monteparano">Monteparano</option>
+                                        <option value="Mottola">Mottola</option>
+                                        <option value="Palagianello">Palagianello</option>
+                                        <option value="Palagiano">Palagiano</option>
+                                        <option value="Pulsano">Pulsano</option>
+                                        <option value="Roccaforzata">Roccaforzata</option>
+                                        <option value="San Giorgio Ionico">San Giorgio Ionico</option>
+                                        <option value="San Marzano di San Giuseppe">San Marzano di San Giuseppe</option>
+                                        <option value="Sava">Sava</option>
+                                        <option value="Statte">Statte</option>
+                                        <option value="Taranto">Taranto</option>
+                                        <option value="Torricella">Torricella</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row p-3">
+                                <div class="col">
+                                    <table class="table">
+                                        <tbody class="table-group-divider">
+                                            <tr>
+                                                <td colspan="7">
+                                                    <div style="overflow-y: scroll; height: 300px;">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">ID</th>
+                                                                    <th scope="col">Nome</th>
+                                                                    <th scope="col">Cognome</th>
+                                                                    <th scope="col">Codice fiscale</th>
+                                                                    <th scope="col">Città</th>
+                                                                    <th scope="col">Incarico</th>
+                                                                    <th scope="col"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="filtered-users-list"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -223,6 +339,6 @@
 
         <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="../js/add-user.js"></script>
+        <script src="../js/add-event.js"></script>
     </body>
 </html>

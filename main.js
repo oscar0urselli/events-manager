@@ -21,7 +21,11 @@ const createWindow = () => {
     ipcMain.handle('getUsers', (event) => { return db_op.getUsers(db); });
     ipcMain.handle('delUser', (event, id) => { return db_op.delUser(db, id); });
     ipcMain.handle('modifyUser', (event, user) => { return db_op.modifyUser(db, user); });
+    ipcMain.handle('addEvent', (event, e) => { return db_op.addEvent(db, e); });
+    ipcMain.handle('getEvents', (event) => { return db_op.getEvents(db); })
+    
     ipcMain.handle('viewUserInfo', (event, user) => { let u = viewUser; viewUser = user; return u;});
+
     win.loadFile(path.join(__dirname, '/assets/html/home.html'));
 }
 

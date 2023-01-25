@@ -46,6 +46,35 @@ window.addEventListener('load', async () => {
     });
 });
 
+var eid = null;
+var warningToast = undefined;
+$('*', document.body).on('click', (event) => {
+    event.stopPropagation();
+    let domElement = $( this ).get( 0 );
+    let id = domElement.document.activeElement.attributes.id.nodeValue
+    
+    if (id.slice(0, 10) === 'del-event-') {
+        eid = id.split('-')[2]
+
+        warningToast = new bootstrap.Toast($('#confirm-toast'));
+        warningToast.show();
+    }
+    else if (id.slice(0, 13) === 'modify-event-') {
+        events.forEach(async (e) => {
+            if (e.id == id.split('-')[2]) {
+                await window.misc.viewEventInfo(e);
+            }
+        });
+    }
+});
+
+$('#del-event').on('click', async () => {
+    if (eid !== null) {
+        const res = await window.db.delEvent(eid);
+        console.log(res);
+    }
+});
+
 $('#confirm-search-event').on('click', () => {
     let searchDate = $('#start_date').val();
     let dateSearchType = $('#date-search-type').val();

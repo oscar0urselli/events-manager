@@ -42,7 +42,7 @@ let confirmToast = undefined;
 // If C.F. is valid fill some of the fields
 $('#cf').on('input', () => {
     let cf = $('#cf').val();
-    let alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let alpha = 'ABCDEHLMPRST';
 
     if (cf.length === 16) {
         let year = Number(cf.slice(6, 8));  
@@ -61,10 +61,6 @@ $('#cf').on('input', () => {
         $('#day').val(String(day));
         $('#month').val(String(alpha.indexOf(month) + 1));
         $('#year').val(year);
-
-        $('#day').prop('disabled', true);
-        $('#month').prop('disabled', true);
-        $('#sex').prop('disabled', true);
     }
 });
 
@@ -113,6 +109,13 @@ $('#pre-add-user').on('click', () => {
 $('#add-user').on('click', async () => {
     let day = Number($('#day').val());
     let month = Number($('#month').val());
+    let path = $('#pic')[0].files[0];
+    if (path === undefined) {
+        path = '';
+    }
+    else {
+        path = path.path
+    }
     
     const user = {
         name: $('#name').val(),
@@ -122,7 +125,7 @@ $('#add-user').on('click', async () => {
         cf: $('#cf').val(),
         city: $('#city').val(),
         role: $('#role').val(),
-        pic: $('#pic')[0].files[0].path
+        pic: path
     };
     const res = await window.db.addUser(user);
 

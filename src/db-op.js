@@ -28,6 +28,10 @@ function getUsers(db) {
     return db.prepare('SELECT * FROM users;').all([]);
 }
 
+function getUser(db, id) {
+    return db.prepare('SELECT * FROM users WHERE id=?;').get([id]);
+}
+
 function delUser(db, id) {
     db.prepare('DELETE FROM users WHERE id=?').run([id]);
     return 'ok';
@@ -58,12 +62,26 @@ function getEvents(db) {
     return db.prepare('SELECT * FROM events;').all([]);
 }
 
+function delEvent(db, id) {
+    db.prepare('DELETE FROM events WHERE id=?').run([id]);
+    return 'ok';
+}
+
+function modifyEvent(db, event) {
+    let sql = 'UPDATE events SET name=?, description=?, notes=?, start_datetime=?, end_datetime=?, site=?, users=? WHERE id=?';
+    db.prepare(sql).run([event.name, event.description, event.notes, event.start_datetime, event.end_datetime, event.site, event.users, event.id]);
+
+    return 'ok';
+}
 
 
 module.exports.addUser = addUser;
 module.exports.getUsers = getUsers;
+module.exports.getUser = getUser;
 module.exports.delUser = delUser;
 module.exports.modifyUser = modifyUser;
 
 module.exports.addEvent = addEvent;
 module.exports.getEvents = getEvents;
+module.exports.delEvent = delEvent;
+module.exports.modifyEvent = modifyEvent;

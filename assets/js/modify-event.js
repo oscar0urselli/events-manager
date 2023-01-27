@@ -116,8 +116,7 @@ $('#sex, #role, #city').on('change', () => {
 
 $('*').on('click', (event) => {
     event.stopPropagation();
-    let domElement = $( this ).get( 0 );
-    let id = domElement.document.activeElement.attributes.id.nodeValue;
+    let id = event.target.id;
 
     if (id.slice(0, 9) === 'add-user-') {
         let uid = Number(id.split('-')[2]);

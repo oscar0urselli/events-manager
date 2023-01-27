@@ -50,8 +50,7 @@ var eid = null;
 var warningToast = undefined;
 $('*', document.body).on('click', (event) => {
     event.stopPropagation();
-    let domElement = $( this ).get( 0 );
-    let id = domElement.document.activeElement.attributes.id.nodeValue
+    let id = event.target.id;
     
     if (id.slice(0, 10) === 'del-event-') {
         eid = id.split('-')[2]

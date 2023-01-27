@@ -10,8 +10,8 @@ function copyFile(source, target) {
 }
 
 function addUser(db, user) {
-    let sql = 'INSERT INTO users (name, surname, sex, birthday, cf, city, role) VALUES (?, ?, ?, ?, ?, ?, ?);';
-    db.prepare(sql).run([user.name, user.surname, user.sex, user.birthday, user.cf, user.city, user.role]);
+    let sql = 'INSERT INTO users (name, surname, sex, birthday, cf, city, role, events) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
+    db.prepare(sql).run([user.name, user.surname, user.sex, user.birthday, user.cf, user.city, user.role, '']);
     let row = db.prepare('SELECT seq FROM sqlite_sequence WHERE name=?;').get(['users']);
     
     console.log(`A user has been inserted with rowid ${row.seq}`);
@@ -56,6 +56,12 @@ function changeUserStatus(db, id, status) {
     return 'ok';
 }
 
+function takePresence(db, uid, eids) {
+    db.prepare('UPDATE users SET events=? WHERE id=?;').run([eids, uid]);
+
+    return 'ok';
+}
+
 
 function addEvent(db, event) {
     let sql = 'INSERT INTO events (name, description, notes, start_datetime, end_datetime, site, users) VALUES (?, ?, ?, ?, ?, ?, ?);';
@@ -87,6 +93,7 @@ module.exports.getUser = getUser;
 module.exports.delUser = delUser;
 module.exports.modifyUser = modifyUser;
 module.exports.changeUserStatus = changeUserStatus;
+module.exports.takePresence = takePresence;
 
 module.exports.addEvent = addEvent;
 module.exports.getEvents = getEvents;

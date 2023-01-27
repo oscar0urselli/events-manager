@@ -6,6 +6,8 @@ contextBridge.exposeInMainWorld('db', {
     getUser: (id) => ipcRenderer.invoke('getUser', id),
     delUser: (id) => ipcRenderer.invoke('delUser', id),
     modifyUser: (user) => ipcRenderer.invoke('modifyUser', user),
+    changeUserStatus: (id, status) => ipcRenderer.invoke('changeUserStatus', id, status),
+    
     addEvent: (event) => ipcRenderer.invoke('addEvent', event),
     getEvents: () => ipcRenderer.invoke('getEvents'),
     delEvent: (id) => ipcRenderer.invoke('delEvent', id),

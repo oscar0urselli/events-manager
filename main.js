@@ -23,6 +23,8 @@ const createWindow = () => {
     ipcMain.handle('getUser', (event, id) => { return db_op.getUser(db, id); });
     ipcMain.handle('delUser', (event, id) => { return db_op.delUser(db, id); });
     ipcMain.handle('modifyUser', (event, user) => { return db_op.modifyUser(db, user); });
+    ipcMain.handle('changeUserStatus', (event, id, status) => { return db_op.changeUserStatus(db, id, status); });
+
     ipcMain.handle('addEvent', (event, e) => { return db_op.addEvent(db, e); });
     ipcMain.handle('getEvents', (event) => { return db_op.getEvents(db); });
     ipcMain.handle('delEvent', (event, id) => { return db_op.delEvent(db, id); });

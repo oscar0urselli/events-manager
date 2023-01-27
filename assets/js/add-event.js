@@ -11,7 +11,8 @@ function updateSearchTable() {
     users.forEach((u) => {
         if ((u.sex === selectedSex || selectedSex === 'undefined') &&
             (u.role === selectedRole || selectedRole === 'undefined') &&
-            (u.city === selectedCity || selectedCity === 'undefined')) {
+            (u.city === selectedCity || selectedCity === 'undefined') &&
+            (u.status === 'active')) {
             
             let status;
             if (addedUsers.indexOf(u.id) !== -1) {
@@ -64,8 +65,6 @@ function updateSearchTable() {
 window.addEventListener('DOMContentLoaded', async (event) => {
     users = await window.db.getUsers();
     events = await window.db.getEvents();
-
-    $('#filter-selection').hide();
 });
 
 window.addEventListener('load', async (event) => {
@@ -74,16 +73,11 @@ window.addEventListener('load', async (event) => {
 });
 
 $('#add-users').on('click', () => {
-    $('#filter-selection').show();
     updateSearchTable();
 });
 
 $('#sex, #role, #city').on('change', () => {
     updateSearchTable();
-});
-
-$('#close-filter-selection').on('click', () => {
-    $('#filter-selection').hide();
 });
 
 $('*').on('click', (event) => {

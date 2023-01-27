@@ -141,6 +141,13 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
+                                        <label class="col-form-label">Stato:</label>
+                                        <select class="form-select" id="status">
+                                            <option value="undefined" selected>Qualunque</option>
+                                            <option value="active">Attivo</option>
+                                            <option value="disabled">Disabilitato</option>
+                                        </select>
+                                        
                                         <label class="col-form-label">Sesso:</label>
                                         <select class="form-select" id="sex">
                                             <option value="undefined" selected>Qualunque</option>
@@ -200,7 +207,7 @@
                         </div>
                     </div>
                     
-                    <div id="users-list" class="row row-cols-1 row-cols-xxl-3 g-4"></div>
+                    <div id="users-list" class="row row-cols-1 row-cols-xxl-3 g-4" style="padding-bottom: 5vh;"></div>
                     
                     <div aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle"><!-- justify-content-center align-items-center w-100 -->
                         <div id="confirm-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">

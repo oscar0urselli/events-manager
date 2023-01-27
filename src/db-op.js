@@ -50,6 +50,12 @@ function modifyUser(db, user) {
     return 'ok';
 }
 
+function changeUserStatus(db, id, status) {
+    db.prepare('UPDATE users SET status=? WHERE id=?;').run([status, id]);
+
+    return 'ok';
+}
+
 
 function addEvent(db, event) {
     let sql = 'INSERT INTO events (name, description, notes, start_datetime, end_datetime, site, users) VALUES (?, ?, ?, ?, ?, ?, ?);';
@@ -80,6 +86,7 @@ module.exports.getUsers = getUsers;
 module.exports.getUser = getUser;
 module.exports.delUser = delUser;
 module.exports.modifyUser = modifyUser;
+module.exports.changeUserStatus = changeUserStatus;
 
 module.exports.addEvent = addEvent;
 module.exports.getEvents = getEvents;

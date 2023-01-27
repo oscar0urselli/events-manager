@@ -12,7 +12,8 @@ function updateSearchTable() {
     users.forEach((u) => {
         if ((u.sex === selectedSex || selectedSex === 'undefined') &&
             (u.role === selectedRole || selectedRole === 'undefined') &&
-            (u.city === selectedCity || selectedCity === 'undefined')) {
+            (u.city === selectedCity || selectedCity === 'undefined') &&
+            (u.status === 'active')) {
             
             let status;
             if (addedUsers.indexOf(u.id) !== -1) {
@@ -71,7 +72,6 @@ window.addEventListener('load', async () => {
     eid = event.id;
     users = await window.db.getUsers();
     events = await window.db.getEvents();
-    console.log(event);
 
     $('#name').val(event.name);
     $('#description').val(event.description);

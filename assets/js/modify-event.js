@@ -26,17 +26,14 @@ function updateSearchTable() {
                     </svg>
                 </button>`;
 
-                let sDatetime = new Date($('#start_date').val() + 'T' + $('#start_time').val() + ':00');
-                let eDatetime = new Date($('#end_date').val() + 'T' + $('#end_time').val() + ':00');
+                let sDatetime = new Date($('#start_date').val() + 'T' + $('#start_time').val()).getTime();
+                let eDatetime = new Date($('#end_date').val() + 'T' + $('#end_time').val()).getTime();
                 events.every((e) => {
-                    let eventStartDatetime = new Date(e.start_datetime);
-                    let eventEndDatetime = new Date(e.end_datetime);
-                    
                     if (e.users.split(';').indexOf(String(u.id)) !== -1 &&
-                        ((sDatetime > eventStartDatetime && sDatetime < eventEndDatetime) ||
-                         (eDatetime > eventStartDatetime && eDatetime < eventEndDatetime) ||
-                         (eventStartDatetime > sDatetime && eventEndDatetime < eDatetime) ||
-                         (eventStartDatetime < sDatetime && eventEndDatetime > eDatetime))) {
+                        ((sDatetime > e.start_datetime && sDatetime < e.end_datetime) ||
+                         (eDatetime > e.start_datetime && eDatetime < e.end_datetime) ||
+                         (e.start_datetime > sDatetime && e.end_datetime < eDatetime) ||
+                         (e.start_datetime < sDatetime && e.end_datetime > eDatetime))) {
 
                         status = `<span class="badge text-bg-danger">Occupato</span>`;
                         
@@ -63,22 +60,20 @@ function updateSearchTable() {
     });
 }
 
-window.addEventListener('DOMContentLoaded', async () => {
-     
-});
-
 window.addEventListener('load', async () => {
     let event = await window.misc.viewEventInfo(undefined);
     eid = event.id;
     users = await window.db.getUsers();
     events = await window.db.getEvents();
 
+    let eStartDatetime = new Date(event.start_datetime).toISOString().split('T');
+    let eEndDatetime = new Date(event.end_datetime).toISOString().split('T');
     $('#name').val(event.name);
     $('#description').val(event.description);
-    $('#start_date').val(event.start_datetime.split('T')[0]);
-    $('#start_time').val(event.start_datetime.split('T')[1]);
-    $('#end_date').val(event.end_datetime.split('T')[0]);
-    $('#end_time').val(event.end_datetime.split('T')[1]);
+    $('#start_date').val(eStartDatetime[0]);
+    $('#start_time').val(eStartDatetime[1].slice(0, 8));
+    $('#end_date').val(eEndDatetime[0]);
+    $('#end_time').val(eEndDatetime[1].slice(0, 8));
     $('#site').val(event.site);
     $('#notes').val(event.notes);
 
@@ -166,8 +161,8 @@ $('#start_date, #start_time, #end_date, #end_time').on('change', () => {
     let endTime = $('#end_time').val();
     
     if (startDate !== '' && startTime !== '' && endDate !== '' && endTime !== '') {
-        let startDateTime = new Date(startDate + 'T' + startTime + ':00');
-        let endDateTime = new Date(endDate + 'T' + endTime + ':00');
+        let startDateTime = new Date(startDate + 'T' + startTime);
+        let endDateTime = new Date(endDate + 'T' + endTime);
 
         if (endDateTime < startDateTime) {
             $('#add-users').prop('disabled', true);
@@ -247,8 +242,8 @@ $('#modify-event').on('click', async () => {
         name: $('#name').val(),
         description: $('#description').val(),
         notes: $('#notes').val(),
-        start_datetime: $('#start_date').val() + 'T' + $('#start_time').val(),
-        end_datetime: $('#end_date').val() + 'T' + $('#end_time').val(),
+        start_datetime: new Date($('#start_date').val() + 'T' + $('#start_time').val()).getTime(),
+        end_datetime: new Date($('#end_date').val() + 'T' + $('#end_time').val()).getTime(),
         site: $('#site').val(),
         users: addedUsers.join(';')
     }

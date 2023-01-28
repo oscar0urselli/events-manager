@@ -16,9 +16,9 @@ window.addEventListener('load', async () => {
     $('#name').text(event.name);
     $('#description').text(event.description);
     $('#start_date').text(new Date(event.start_datetime).toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })); //.text(event.start_datetime.split('T')[0]);
-    $('#start_time').text(event.start_datetime.split('T')[1]);
+    $('#start_time').text(new Date(event.start_datetime).toLocaleTimeString('it-IT'));
     $('#end_date').text(new Date(event.end_datetime).toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })); //.text(event.end_datetime.split('T')[0]);
-    $('#end_time').text(event.end_datetime.split('T')[1]);
+    $('#end_time').text(new Date(event.end_datetime).toLocaleTimeString('it-IT'));
     $('#site').text(event.site);
     $('#notes').text(event.notes);
 

@@ -132,3 +132,19 @@ $('#confirm-search-user').on('click', () => {
         }
     });
 });
+
+$('#export-users-view').on('click', async (event) => {
+    let statusFilter = $('#status').val();
+    let sexFilter = $('#sex').val();
+    let roleFilter = $('#role').val();
+    let cityFilter = $('#city').val();
+
+    const conditions = {
+        status: statusFilter,
+        sex: sexFilter,
+        role: roleFilter,
+        city: cityFilter
+    };
+
+    console.log(await window.db.exportUsersView(conditions));
+});

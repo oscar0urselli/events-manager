@@ -6,17 +6,15 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 window.addEventListener('load', async () => {
     events = await window.db.getEvents();
-    let nowDatetime = new Date();
+    let nowDatetime = new Date().getTime();
 
     events.forEach((e) => {
-        let startDatetime = new Date(e.start_datetime);
-        let endDatetime = new Date(e.end_datetime);
         let status;
 
-        if (nowDatetime > startDatetime && nowDatetime < endDatetime) {
+        if (nowDatetime > e.start_datetime && nowDatetime < e.end_datetime) {
             status = '<span class="badge text-bg-warning">In corso</span>';
         }
-        else if (nowDatetime > endDatetime) {
+        else if (nowDatetime > e.end_datetime) {
             status = '<span class="badge text-bg-secondary">Terminato</span>';
         }
         else {
@@ -33,8 +31,8 @@ window.addEventListener('load', async () => {
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">${status}</li>
                     <li class="list-group-item">Luogo: ${e.site}</li>
-                    <li class="list-group-item">Inizio: ${startDatetime.toLocaleString('it-IT')}</li>
-                    <li class="list-group-item">Fine: ${endDatetime.toLocaleString('it-IT')}</li>
+                    <li class="list-group-item">Inizio: ${new Date(e.start_datetime).toLocaleString('it-IT')}</li>
+                    <li class="list-group-item">Fine: ${new Date(e.end_datetime).toLocaleString('it-IT')}</li>
                 </ul>
                 <div class="card-body">
                     <a id="modify-event-${e.id}" href="modify-event.html" class="btn btn-primary btn-lg">Modifica</a>
@@ -79,27 +77,25 @@ $('#confirm-search-event').on('click', () => {
     let dateSearchType = $('#date-search-type').val();
     let statusFilter = $('#status').val();
 
-    let nowDatetime = new Date();
-    let searchDateFilter = new Date(searchDate);
+    let nowDatetime = new Date().getTime();
+    let searchDateFilter = new Date(searchDate).getTime();
 
     $('#events-list').empty();
     events.forEach((e) => {
-        if (((statusFilter === '1' && nowDatetime > new Date(e.start_datetime) && nowDatetime < new Date(e.end_datetime)) ||
-            (statusFilter === '2' && nowDatetime > new Date(e.end_datetime)) ||
-            (statusFilter === '3' && nowDatetime < new Date(e.start_datetime)) ||
+        if (((statusFilter === '1' && nowDatetime > e.start_datetime && nowDatetime < e.end_datetime) ||
+            (statusFilter === '2' && nowDatetime > e.end_datetime) ||
+            (statusFilter === '3' && nowDatetime < e.start_datetime) ||
             (statusFilter === 'undefined')) &&
-            ((dateSearchType === '1' && new Date(e.end_datetime) < searchDateFilter) ||
-            (dateSearchType === '2' && new Date(e.start_datetime) > searchDateFilter) ||
+            ((dateSearchType === '1' && e.end_datetime < searchDateFilter) ||
+            (dateSearchType === '2' && e.start_datetime > searchDateFilter) ||
             (dateSearchType === 'undefined' || searchDate === ''))) {
             
-            let startDatetime = new Date(e.start_datetime);
-            let endDatetime = new Date(e.end_datetime);
             let status;
 
-            if (nowDatetime > startDatetime && nowDatetime < endDatetime) {
+            if (nowDatetime > e.start_datetime && nowDatetime < e.end_datetime) {
                 status = '<span class="badge text-bg-warning">In corso</span>';
             }
-            else if (nowDatetime > endDatetime) {
+            else if (nowDatetime > e.end_datetime) {
                 status = '<span class="badge text-bg-secondary">Terminato</span>';
             }
             else {
@@ -115,8 +111,8 @@ $('#confirm-search-event').on('click', () => {
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">${status}</li>
                             <li class="list-group-item">Luogo: ${e.site}</li>
-                            <li class="list-group-item">Inizio: ${startDatetime.toLocaleString('it-IT')}</li>
-                            <li class="list-group-item">Fine: ${endDatetime.toLocaleString('it-IT')}</li>
+                            <li class="list-group-item">Inizio: ${new Date(e.start_datetime).toLocaleString('it-IT')}</li>
+                            <li class="list-group-item">Fine: ${new Date(e.end_datetime).toLocaleString('it-IT')}</li>
                         </ul>
                         <div class="card-body">
                             <a id="modify-event-${e.id}" href="modify-event.html" class="btn btn-primary btn-lg">Modifica</a>
@@ -127,4 +123,18 @@ $('#confirm-search-event').on('click', () => {
             `);
         }
     });
+});
+
+$('#export-events-view').on('click', async (event) => {
+    let searchDate = $('#start_date').val();
+    let dateSearchType = $('#date-search-type').val();
+    let statusFilter = $('#status').val();
+
+    const conditions = {
+        date: new Date(searchDate).getTime(),
+        dateType: dateSearchType,
+        status: statusFilter
+    };
+
+    console.log(await window.db.exportEventsView(conditions));
 });

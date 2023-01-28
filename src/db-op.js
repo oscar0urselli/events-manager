@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const csv = require('csv');
 
 
 function copyFile(source, target) {
@@ -62,6 +63,32 @@ function takePresence(db, uid, eids) {
     return 'ok';
 }
 
+function exportUsersView(db, conditions) {
+    let sql = 'SELECT * FROM users WHERE ';
+    let params = [];
+    for (let key in conditions) {
+        if (conditions[key] !== 'undefined') {
+            sql += key + '=? AND ';
+            params.push(conditions[key]);
+        }
+        else {
+            sql += '1=1 AND ';
+        }
+    }
+    sql = sql.slice(0, sql.length - 5) + ';';
+
+    let columns = ['id', 'name', 'surname', 'sex', 'birthday', 'cf', 'city', 'role', 'events', 'status'];
+    let writableStream = fs.createWriteStream(path.join(__dirname, '../assets/csv/users-view.csv'));
+    let stringifier = csv.stringify({ header: true, columns: columns });
+
+    for (const row of db.prepare(sql).iterate(params)) {
+        stringifier.write(row);
+    }
+    stringifier.pipe(writableStream);
+
+    return 'ok';
+}
+
 
 function addEvent(db, event) {
     let sql = 'INSERT INTO events (name, description, notes, start_datetime, end_datetime, site, users) VALUES (?, ?, ?, ?, ?, ?, ?);';
@@ -86,6 +113,31 @@ function modifyEvent(db, event) {
     return 'ok';
 }
 
+function exportEventsView(db, conditions) {
+    let sql = 'SELECT * FROM events;';
+
+    let columns = ['id', 'name', 'description', 'notes', 'start_datetime', 'end_datetime', 'site', 'users'];
+    let writableStream = fs.createWriteStream(path.join(__dirname, '../assets/csv/events-view.csv'));
+    let stringifier = csv.stringify({ header: true, columns: columns });
+
+    let nowDatetime = new Date().getTime();
+    for (const row of db.prepare(sql).iterate([])) {
+        if (((conditions.status === '1' && nowDatetime > row.start_datetime && nowDatetime < row.end_datetime) ||
+            (conditions.status === '2' && nowDatetime > row.end_datetime) ||
+            (conditions.status === '3' && nowDatetime < row.start_datetime) ||
+            (conditions.status === 'undefined')) &&
+            ((conditions.dateType === '1' && row.end_datetime < conditions.date) ||
+            (conditions.dateType === '2' && row.start_datetime > conditions.date) ||
+            (conditions.dateType === 'undefined' || conditions.date === ''))) {
+            
+            stringifier.write(row);
+        }
+    }
+    stringifier.pipe(writableStream);
+
+    return 'ok';
+}
+
 
 module.exports.addUser = addUser;
 module.exports.getUsers = getUsers;
@@ -94,8 +146,10 @@ module.exports.delUser = delUser;
 module.exports.modifyUser = modifyUser;
 module.exports.changeUserStatus = changeUserStatus;
 module.exports.takePresence = takePresence;
+module.exports.exportUsersView = exportUsersView;
 
 module.exports.addEvent = addEvent;
 module.exports.getEvents = getEvents;
 module.exports.delEvent = delEvent;
 module.exports.modifyEvent = modifyEvent;
+module.exports.exportEventsView = exportEventsView;

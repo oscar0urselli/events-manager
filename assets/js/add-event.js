@@ -25,17 +25,14 @@ function updateSearchTable() {
                     </svg>
                 </button>`;
 
-                let sDatetime = new Date($('#start_date').val() + 'T' + $('#start_time').val() + ':00');
-                let eDatetime = new Date($('#end_date').val() + 'T' + $('#end_time').val() + ':00');
+                let sDatetime = new Date($('#start_date').val() + 'T' + $('#start_time').val()).getTime();
+                let eDatetime = new Date($('#end_date').val() + 'T' + $('#end_time').val()).getTime();
                 events.every((e) => {
-                    let eventStartDatetime = new Date(e.start_datetime);
-                    let eventEndDatetime = new Date(e.end_datetime);
-                    console.log(e);
                     if (e.users.split(';').indexOf(String(u.id)) !== -1 &&
-                        ((sDatetime > eventStartDatetime && sDatetime < eventEndDatetime) ||
-                         (eDatetime > eventStartDatetime && eDatetime < eventEndDatetime) ||
-                         (eventStartDatetime > sDatetime && eventEndDatetime < eDatetime) ||
-                         (eventStartDatetime < sDatetime && eventEndDatetime > eDatetime))) {
+                        ((sDatetime > e.start_datetime && sDatetime < e.end_datetime) ||
+                         (eDatetime > e.start_datetime && eDatetime < e.end_datetime) ||
+                         (e.start_datetime > sDatetime && e.end_datetime < eDatetime) ||
+                         (e.start_datetime < sDatetime && e.end_datetime > eDatetime))) {
 
                         status = `<span class="badge text-bg-danger">Occupato</span>`;
                         
@@ -134,8 +131,8 @@ $('#start_date, #start_time, #end_date, #end_time').on('change', () => {
     let endTime = $('#end_time').val();
     
     if (startDate !== '' && startTime !== '' && endDate !== '' && endTime !== '') {
-        let startDateTime = new Date(startDate + 'T' + startTime + ':00');
-        let endDateTime = new Date(endDate + 'T' + endTime + ':00');
+        let startDateTime = new Date(startDate + 'T' + startTime);
+        let endDateTime = new Date(endDate + 'T' + endTime);
 
         if (endDateTime < startDateTime) {
             $('#add-users').prop('disabled', true);
@@ -182,8 +179,8 @@ $('#pre-add-event').on('click', () => {
     let endDate = $('#end_date').val();
     let endTime = $('#end_time').val();
     if (startDate !== '' && startTime !== '' && endDate !== '' && endTime !== '') {
-        let startDateTime = new Date(startDate + 'T' + startTime + ':00');
-        let endDateTime = new Date(endDate + 'T' + endTime + ':00');
+        let startDateTime = new Date(startDate + 'T' + startTime);
+        let endDateTime = new Date(endDate + 'T' + endTime);
 
         if (endDateTime < startDateTime) {
             errorStackTrace.push('FINE EVENTO ANTECEDENTE ALL\'INIZIO');
@@ -214,8 +211,8 @@ $('#add-event').on('click', async () => {
         name: $('#name').val(),
         description: $('#description').val(),
         notes: $('#notes').val(),
-        start_datetime: $('#start_date').val() + 'T' + $('#start_time').val() + ':00',
-        end_datetime: $('#end_date').val() + 'T' + $('#end_time').val() + ':00',
+        start_datetime: new Date($('#start_date').val() + 'T' + $('#start_time').val()).getTime(),
+        end_datetime: new Date($('#end_date').val() + 'T' + $('#end_time').val()).getTime(),
         site: $('#site').val(),
         users: addedUsers.join(';')
     }

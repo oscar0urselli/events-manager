@@ -8,11 +8,13 @@ contextBridge.exposeInMainWorld('db', {
     modifyUser: (user) => ipcRenderer.invoke('modifyUser', user),
     changeUserStatus: (id, status) => ipcRenderer.invoke('changeUserStatus', id, status),
     takePresence: (uid, eids) => ipcRenderer.invoke('takePresence', uid, eids),
+    exportUsersView: (conditions) => ipcRenderer.invoke('exportUsersView', conditions),
     
     addEvent: (event) => ipcRenderer.invoke('addEvent', event),
     getEvents: () => ipcRenderer.invoke('getEvents'),
     delEvent: (id) => ipcRenderer.invoke('delEvent', id),
-    modifyEvent: (event) => ipcRenderer.invoke('modifyEvent', event)
+    modifyEvent: (event) => ipcRenderer.invoke('modifyEvent', event),
+    exportEventsView: (conditions) => ipcRenderer.invoke('exportEventsView', conditions)
 });
 contextBridge.exposeInMainWorld('misc', {
     viewUserInfo: (user) => ipcRenderer.invoke('viewUserInfo', user),

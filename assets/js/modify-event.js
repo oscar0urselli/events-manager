@@ -6,11 +6,13 @@ var addedUsers = [];
 function updateSearchTable() {
     $('#filtered-users-list').empty();
     
-    let selectedSex = $('#sex').val();
+    let nameFilter = $('#user-name').val().toLowerCase();
+    let surnameFilter = $('#user-surname').val().toLowerCase();
     let selectedRole = $('#role').val();
     let selectedCity = $('#city').val();
     users.forEach((u) => {
-        if ((u.sex === selectedSex || selectedSex === 'undefined') &&
+        if ((u.name.toLowerCase().indexOf(nameFilter) !== -1 || nameFilter === '') &&
+            (u.surname.toLowerCase().indexOf(surnameFilter) !== -1 || surnameFilter === '') &&
             (u.role === selectedRole || selectedRole === 'undefined') &&
             (u.city === selectedCity || selectedCity === 'undefined') &&
             (u.status === 'active')) {
@@ -21,7 +23,7 @@ function updateSearchTable() {
             }
             else {
                 status = `<button id="add-user-${u.id}" type="button" class="btn btn-outline-success btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16"  style="pointer-events: none;">
                         <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
                     </svg>
                 </button>`;
@@ -91,7 +93,7 @@ window.addEventListener('load', async () => {
             <td>${u.role}</td>
             <td>
                 <button id="del-user-${u.id}" type="button" class="btn btn-danger btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16" style="pointer-events: none;">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                     </svg>
                 </button>
@@ -105,7 +107,10 @@ $('#add-users').on('click', () => {
     updateSearchTable();
 });
 
-$('#sex, #role, #city').on('change', () => {
+$('#role, #city').on('change', () => {
+    updateSearchTable();
+});
+$('#user-name, #user-surname').on('input', () => {
     updateSearchTable();
 });
 
@@ -139,7 +144,7 @@ $('*').on('click', (event) => {
             <td>${u.role}</td>
             <td>
                 <button id="del-user-${u.id}" type="button" class="btn btn-danger btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16" style="pointer-events: none;">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                     </svg>
                 </button>

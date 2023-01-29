@@ -11,8 +11,8 @@ function copyFile(source, target) {
 }
 
 function addUser(db, user) {
-    let sql = 'INSERT INTO users (name, surname, sex, birthday, cf, city, role, events) VALUES (?, ?, ?, ?, ?, ?, ?, ?);';
-    db.prepare(sql).run([user.name, user.surname, user.sex, user.birthday, user.cf, user.city, user.role, '']);
+    let sql = 'INSERT INTO users (name, surname, sex, birthday, cf, city, role, events, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);';
+    db.prepare(sql).run([user.name, user.surname, user.sex, user.birthday, user.cf, user.city, user.role, '', 'active']);
     let row = db.prepare('SELECT seq FROM sqlite_sequence WHERE name=?;').get(['users']);
     
     console.log(`A user has been inserted with rowid ${row.seq}`);
@@ -64,25 +64,20 @@ function takePresence(db, uid, eids) {
 }
 
 function exportUsersView(db, conditions) {
-    let sql = 'SELECT * FROM users WHERE ';
-    let params = [];
-    for (let key in conditions) {
-        if (conditions[key] !== 'undefined') {
-            sql += key + '=? AND ';
-            params.push(conditions[key]);
-        }
-        else {
-            sql += '1=1 AND ';
-        }
-    }
-    sql = sql.slice(0, sql.length - 5) + ';';
-
     let columns = ['id', 'name', 'surname', 'sex', 'birthday', 'cf', 'city', 'role', 'events', 'status'];
     let writableStream = fs.createWriteStream(path.join(__dirname, '../assets/csv/users-view.csv'));
     let stringifier = csv.stringify({ header: true, columns: columns });
 
-    for (const row of db.prepare(sql).iterate(params)) {
-        stringifier.write(row);
+    for (const u of db.prepare('SELECT * FROM users;').iterate([])) {
+        if ((u.status === conditions.status || conditions.status === 'undefined') &&
+            (u.sex === conditions.sex || conditions.sex === 'undefined') && 
+            (u.role === conditions.role || conditions.role === 'undefined') && 
+            (u.city === conditions.city || conditions.city === 'undefined') &&
+            (u.name.toLowerCase().indexOf(conditions.name) !== -1 || conditions.name === '') &&
+            (u.surname.toLowerCase().indexOf(conditions.surname) !== -1 || conditions.surname === '')) {
+        
+            stringifier.write(u);
+        }
     }
     stringifier.pipe(writableStream);
 

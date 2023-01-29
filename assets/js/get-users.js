@@ -1,9 +1,5 @@
 var users;
 
-window.addEventListener('DOMContentLoaded', (event) => {
-    
-});
-
 window.addEventListener('load', async (event) => { 
     users = await window.db.getUsers();
 
@@ -87,6 +83,8 @@ $('#del-user').on('click', async () => {
 });
 
 $('#confirm-search-user').on('click', () => {
+    let nameFilter = $('#name').val().toLowerCase();
+    let surnameFilter = $('#surname').val().toLowerCase();
     let statusFilter = $('#status').val();
     let sexFilter = $('#sex').val();
     let roleFilter = $('#role').val();
@@ -97,7 +95,9 @@ $('#confirm-search-user').on('click', () => {
         if ((u.status === statusFilter || statusFilter === 'undefined') &&
             (u.sex === sexFilter || sexFilter === 'undefined') && 
             (u.role === roleFilter || roleFilter === 'undefined') && 
-            (u.city === cityFilter || cityFilter === 'undefined')) {
+            (u.city === cityFilter || cityFilter === 'undefined') &&
+            (u.name.toLowerCase().indexOf(nameFilter) !== -1 || nameFilter === '') &&
+            (u.surname.toLowerCase().indexOf(surnameFilter) !== -1 || surnameFilter === '')) {
             
             let status = `<input class="px-3 form-check-input" type="checkbox" role="switch" id="change-status-${u.id}" checked>
                 Stato:
@@ -134,12 +134,16 @@ $('#confirm-search-user').on('click', () => {
 });
 
 $('#export-users-view').on('click', async (event) => {
+    let nameFilter = $('#name').val().toLowerCase();
+    let surnameFilter = $('#surname').val().toLowerCase();
     let statusFilter = $('#status').val();
     let sexFilter = $('#sex').val();
     let roleFilter = $('#role').val();
     let cityFilter = $('#city').val();
 
     const conditions = {
+        name: nameFilter,
+        surname: surnameFilter,
         status: statusFilter,
         sex: sexFilter,
         role: roleFilter,

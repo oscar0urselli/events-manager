@@ -1,10 +1,53 @@
 const path = require('path');
+const fs = require('fs');
 const { app, BrowserWindow, ipcMain } = require('electron');
 const Database = require('better-sqlite3'); //require('sqlite3').verbose();
 const db_op = require('./src/db-op');
 
 
-const db = new Database(path.join(__dirname, './test.db'), { verbose: console.log });
+let db = null; 
+
+try {
+    db = new Database(path.join(__dirname, './database.db'), { fileMustExist: true, verbose: console.log });
+}
+catch (error) {
+    console.error(error);
+
+    let dbExists = false;
+    if (fs.existsSync(path.join(__dirname, 'src/backup-database.db'))) {
+        fs.copyFileSync(path.join(__dirname, 'src/backup-database.db'), path.join(__dirname, './database.db'));
+        dbExists = true;
+    }
+
+    db = new Database(path.join(__dirname, './database.db'), { verbose: console.log });
+    if (!dbExists) {
+        db.prepare(`CREATE TABLE users (
+            id       INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            name     TEXT,
+            surname  TEXT,
+            sex      TEXT,
+            birthday TEXT,
+            cf       TEXT,
+            city     TEXT,
+            role     TEXT,
+            events   TEXT,
+            pic      TEXT,
+            status   TEXT
+        );`).run([]);
+        db.prepare(`CREATE TABLE events (
+            id             INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            name           TEXT,
+            description    TEXT,
+            notes          TEXT,
+            start_datetime INTEGER,
+            end_datetime   INTEGER,
+            site           TEXT,
+            users          TEXT,
+            test           BLOB
+        );`).run([]);
+    }
+}
+
 db.pragma('journal_mode = WAL');
 console.log('Connected to the SQlite database.');
 var viewUser = undefined;
@@ -52,7 +95,16 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit();
+    db.backup(path.join(__dirname, 'src/backup-database.db'))
+        .then(() => {
+            console.log('Backup completed.');
+        })
+        .catch((err) => {
+            console.log('Backup failed', err);
+        })
+        .finally(() => {
+            if (process.platform !== 'darwin') app.quit();
+        });
 });
 
 app.on('before-quit', () => {

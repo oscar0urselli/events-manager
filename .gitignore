@@ -6,3 +6,4 @@ assets/pics/*.jpg
 assets/pics/*.jpeg
 assets/pics/*.png
 assets/csv/*.csv
+out/

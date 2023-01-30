@@ -4,6 +4,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const Database = require('better-sqlite3'); //require('sqlite3').verbose();
 const db_op = require('./src/db-op');
 
+if (require('electron-squirrel-startup')) app.quit();
 
 let db = null; 
 

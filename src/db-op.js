@@ -96,6 +96,10 @@ function getEvents(db) {
     return db.prepare('SELECT * FROM events;').all([]);
 }
 
+function getEvent(db, id) {
+    return db.prepare('SELECT * FROM events WHERE id=?;').get([id]);
+}
+
 function delEvent(db, id) {
     db.prepare('DELETE FROM events WHERE id=?').run([id]);
     return 'ok';
@@ -145,6 +149,7 @@ module.exports.exportUsersView = exportUsersView;
 
 module.exports.addEvent = addEvent;
 module.exports.getEvents = getEvents;
+module.exports.getEvent = getEvent;
 module.exports.delEvent = delEvent;
 module.exports.modifyEvent = modifyEvent;
 module.exports.exportEventsView = exportEventsView;

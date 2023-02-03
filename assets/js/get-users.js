@@ -18,7 +18,7 @@ window.addEventListener('load', async (event) => {
             <div class="card text-center shadow-lg h-100" style="width: 18rem;">
                 <img src="../../${u.pic}" class="card-img-top img-thumbnail">
                 <div class="card-body">
-                    <h5 class="card-title">${u.name} ${u.surname}</h5>
+                    <h5 class="card-title"><a id="info-user-${u.id}" href="info-user.html">${u.name} ${u.surname}</a></h5>
                     <p class="text-secondary">#${u.id}</p>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -42,9 +42,8 @@ var uid = null;
 var warningToast = undefined;
 $('*', document.body ).on('click', async (event) => {
     event.stopPropagation();
-    let domElement = $( this ).get( 0 );
-    let id = domElement.document.activeElement.attributes.id.nodeValue
-    
+    let id = event.target.id;
+    console.log(id);
     if (id.slice(0, 9) === 'del-user-') {
         uid = id.split('-')[2]
 
@@ -52,6 +51,13 @@ $('*', document.body ).on('click', async (event) => {
         warningToast.show();
     }
     else if (id.slice(0, 12) === 'modify-user-') {
+        users.forEach(async (u) => {
+            if (u.id == id.split('-')[2]) {
+                await window.misc.viewUserInfo(u);
+            }
+        });
+    }
+    else if (id.slice(0, 10) === 'info-user-') {
         users.forEach(async (u) => {
             if (u.id == id.split('-')[2]) {
                 await window.misc.viewUserInfo(u);
@@ -113,7 +119,7 @@ $('#confirm-search-user').on('click', () => {
                 <div class="card text-center shadow-lg h-100" style="width: 18rem;">
                     <img src="../../${u.pic}" class="card-img-top img-thumbnail">
                     <div class="card-body">
-                        <h5 class="card-title">${u.name} ${u.surname}</h5>
+                        <h5 class="card-title"><a id="info-user-${u.id}" href="info-user.html">${u.name} ${u.surname}</a></h5>
                         <p class="text-secondary">#${u.id}</p>
                     </div>
                     <ul class="list-group list-group-flush">
@@ -124,6 +130,7 @@ $('#confirm-search-user').on('click', () => {
                     </ul>
                     <div class="card-body">
                         <a id="modify-user-${u.id}" href="modify-user.html" class="btn btn-primary btn-lg">Modifica</a>
+                        <a id="info-user-${u.id}" href="info-user.html" class="btn btn-info btn-lg">Informazioni</a>
                         <button type="button" id="del-user-${u.id}" class="btn btn-danger btn-lg">Elimina</button>
                     </div>
                 </div>

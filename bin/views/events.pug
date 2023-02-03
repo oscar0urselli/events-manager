@@ -1,0 +1,50 @@
+extends index.pug
+
+block view_actions
+    a(href="add-event.html" class="btn btn-primary btn-lg") Aggiungi evento
+    
+    button(type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#filter-selection") Filtra eventi
+    div#filter-selection(class="modal fade" tabindex="-1" aria-labelledby="filter-selection-title" aria-hidden="true")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    h1#filter-selection-title(class="modal-title fs-5") Filtra eventi
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                
+                div(class="modal-body")
+                    label(class="col-form-label") Data:
+                    input#start_date(type="date" class="form-control")
+
+                    label(class="col-form-label") Tipo di ricerca della data:
+                    select#date-search-type(class="form-select")
+                        option(value="undefined" selected) Qualunque
+                        option(value="1") Precedente
+                        option(value="2") Successivo
+
+                    label(class="col-form-label") Stato:
+                    select#status(class="form-select")
+                        option(value="undefined" selected) Qualunque
+                        option(value="1") In corso
+                        option(value="2") Terminato
+                        option(value="3") Prossimamente
+
+                div(class="modal-footer")
+                    button#confirm-search-event(class="w-100 btn btn-outline-success btn-lg" type="button" data-bs-dismiss="modal") Filtra eventi
+                    a#export-events-view(href="../csv/events-view.csv" download="events-view.csv" class="w-100 btn btn-outline-info btn-lg") Esporta eventi
+
+block content
+    <div id="events-list" class="row row-cols-1 row-cols-xxl-3 g-4" style="padding-bottom: 5vh;"></div>
+
+    div(aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
+        div#confirm-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
+            div(class="toast-header text-bg-warning")
+                strong(class="fs-3 me-auto") ATTENZIONE
+            
+            div(class="toast-body")
+                p(class="fs-4") Confermi di voler eliminare l'evento?
+                div(class="mt-2 pt-2 border-top")
+                    a#del-event(href="events.html" class="btn btn-danger btn-lg") Elimina
+                    button(type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast") Chiudi
+
+block js
+    script(src="../js/get-events.js")

@@ -73,6 +73,7 @@ const createWindow = () => {
 
     ipcMain.handle('addEvent', (event, e) => { return db_op.addEvent(db, e); });
     ipcMain.handle('getEvents', (event) => { return db_op.getEvents(db); });
+    ipcMain.handle('getEvent', (event, id) => { return db_op.getEvent(db, id); });
     ipcMain.handle('delEvent', (event, id) => { return db_op.delEvent(db, id); });
     ipcMain.handle('modifyEvent', (event, e) => { return db_op.modifyEvent(db, e); });
     ipcMain.handle('exportEventsView', (event, conditions) => { return db_op.exportEventsView(db, conditions); });

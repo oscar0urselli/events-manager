@@ -1,0 +1,72 @@
+extends index.pug 
+
+block view_sections
+    a(href="users.html" class="btn btn-outline-danger btn-lg") Torna indietro
+
+block content
+    form(class="needs-validation")
+        div(class="row")
+            div(class="col")
+            div(class="col-2 bg-body rounded shadow-lg")
+                label(class="col-form-label") Codice fiscale:
+                input#cf(type="text" class="form-control" placeholder="Codice fiscale" required)
+            div(class="col")
+            div(class="col-4 bg-body rounded shadow-lg")
+                include includes/user/name-field.pug
+            div(class="col")
+            div(class="col-4 bg-body rounded shadow-lg")
+                include includes/user/surname-field.pug
+            div(class="col")
+        
+        div(class="row" style="padding-top: 2vh;")
+            div(class="col")
+            div(class="col-3 bg-body rounded shadow-lg")
+                div(class="row")
+                    label class="col-form-label">Data di nascita:</label>
+                div(class="row")
+                    input#day(type="number" class="col form-control" placeholder="gg" min="1" max="31" required)
+                    input#month(type="number" class="col form-control" placeholder="mm" min="1" max="12" required)
+                    input#year(type="number" class="col form-control" placeholder="aaaa" min="1900" max="3000" required)
+                
+            div(class="col")
+            div(class="col-4 bg-body rounded shadow-lg")
+                include includes/user/city-select.pug
+            div(class="col")
+            div(class="col-3 bg-body rounded shadow-lg")
+                include includes/user/sex-select.pug
+            div(class="col")
+        
+        div(class="row" style="padding-top: 2vh;")
+            div(class="col")
+            div(class="col-4 bg-body rounded shadow-lg")
+                include includes/user/role-select.pug
+            div(class="col")
+            div(class="col-3 bg-body rounded shadow-lg")
+                label(for="formFile" class="form-label") Scegli una foto:
+                input#pic(class="form-control" type="file" accept=".jpg,.jpeg,.png")
+            div(class="col")
+            div(class="col-3 bg-body rounded shadow-lg ext-center position-relative")
+                button#pre-add-user(class="w-100 h-100 position-absolute top-50 start-50 translate-middle btn btn-primary btn-lg" type="button") Aggiungi
+            div(class="col")
+
+
+    div(aria-live="polite" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
+        div#error-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
+            div(class="toast-header text-bg-danger")
+                strong(class="fs-3 me-auto") ERRORE
+                button(type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close")
+            div(class="toast-body")
+                p#error-fields(class="fs-4" style="white-space: pre-line;")
+    
+    div(aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
+        div#confirm-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
+            div(class="toast-header text-bg-warning")
+                strong(class="fs-3 me-auto") ATTENZIONE
+            div(class="toast-body")
+                p(class="fs-4") Confermi di voler aggiungere il volontario?
+                div(class="mt-2 pt-2 border-top")
+                    a#add-user(href="users.html" class="btn btn-primary btn-lg") Aggiungi
+                    button(type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="toast") Chiudi
+            
+block js
+    script(src="../js/add-user.js")

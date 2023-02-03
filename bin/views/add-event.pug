@@ -1,0 +1,138 @@
+extends index.pug 
+
+block view_actions
+    a(href="events.html" class="btn btn-outline-danger btn-lg") Torna indietro
+
+block content 
+    form(class="needs-validation")
+        div(class="row")
+            div(class="col")
+            div(class="col-4 bg-body rounded shadow-lg")
+                include includes/event/name-field.pug
+            div(class="col")
+            div(class="col-7 bg-body rounded shadow-lg")
+                include includes/event/description-field.pug
+            div(class="col")
+        
+        div(class="row" style="padding-top: 2vh;")
+            div(class="col")
+            div(class="col-3 bg-body rounded shadow-lg")
+                include includes/event/start-date-field.pug
+            div(class="col")
+            div(class="col-2 bg-body rounded shadow-lg")
+                include includes/event/start-time-field.pug
+            div(class="col")
+            div(class="col-3 bg-body rounded shadow-lg")
+                include includes/event/end-date-field.pug
+            div(class="col")
+            div(class="col-2 bg-body rounded shadow-lg")
+                include include/event/end-time-field.pug
+            div(class="col")
+        
+        div(class="row" style="padding-top: 2vh;")
+            div(class="col")
+            dic(class="col-4 bg-body rounded shadow-lg")
+                include includes/event/site-field.pug
+            div(class="col")
+            div(class="col-7 bg-body rounded shadow-lg")
+                include includes/event/notes-field.pug
+            div(class="col")
+        
+        div(class="row" style="padding-top: 5vh;")
+            div(class="col-1")
+            div#add-users-btn-field(class="col")
+                div(data-bs-trigger="hover" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="Per poter scegliere i volontari bisogna prima impostare data e ora di inizio e fine evento.")
+                    button#add-users(class="w-100 btn btn-success btn-lg" type="button" data-bs-toggle="modal" data-bs-target="#filter-selection" disabled) Aggiungi partecipanti
+            div(class="col-1")
+        
+        div(class="row" style="padding-top: 3vh;")
+            div(class="col-1")
+            div(class="col-10 bg-body rounded shadow-lg text-center")
+                table(class="table")
+                    thead
+                        tr
+                            th(scope="col") ID
+                            th(scope="col") Nome
+                            th(scope="col") Cognome
+                            th(scope="col") Codice fiscale
+                            th(scope="col") Città
+                            th(scope="col") Incarico
+                            th(scope="col") 
+                        
+                    tbody#added-users-table(class="table-group-divider")            
+            div(class="col-1")
+        
+        div(class="row" style="padding-top: 2vh;")
+            div(class="col-1")
+            div(class="col pt-3 pb-5")
+                button#pre-add-event(class="w-100 btn btn-primary btn-lg" type="button") Crea
+            div(class="col-1")
+        
+
+    div(aria-live="polite" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
+        div#error-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
+            div(class="toast-header text-bg-danger")
+                strong(class="fs-3 me-auto") ERRORE
+                button(type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close")
+            
+            div(class="toast-body")
+                p#error-fields(class="fs-4" style="white-space: pre-line;")
+            
+    div(aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
+        div#confirm-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
+            div(class="toast-header text-bg-warning")
+                strong(class="fs-3 me-auto") ATTENZIONE
+            
+            div(class="toast-body")
+                p(class="fs-4") Confermi di voler creare l'evento?
+                div(class="mt-2 pt-2 border-top")
+                    a#add-event(href="events.html" class="btn btn-primary btn-lg") Crea
+                    button(type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="toast") Chiudi
+
+
+    div#filter-selection(class="modal fade" tabindex="-1" aria-labelledby="filter-selection-title" aria-hidden="true")
+        div(class="modal-dialog")
+            div(class="modal-content position-absolute start-50 translate-middle-x" style="width: 60rem;")
+                div(class="modal-header")
+                    h1#filter-selection-title(class="modal-title fs-5") Aggiugni volontari
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                
+                div(class="modal-body")
+                    div(class="row")
+                        div(class="col")
+                            label(class="col-form-label") Nome:
+                            input(type="text" class="form-control" id="user-name" placeholder="Nome")
+                        
+                        div(class="col")
+                            label(class="col-form-label") Cognome:
+                            input(type="text" class="form-control" id="user-surname" placeholder="Cognome")
+                    
+                    div(class="row")
+                        div(class="col")
+                            include includes/user/role-select.pug
+                        
+                        div(class="col")
+                            include includes/user/city-select.pug
+                    
+                    div(class="row p-3")
+                        div(class="col")
+                            table(class="table")
+                                tbody(class="table-group-divider")
+                                    tr
+                                        td(colspan="7")
+                                            div(style="overflow-y: scroll; height: 300px;")
+                                                table(class="table")
+                                                    thead
+                                                        tr
+                                                            th(scope="col") ID
+                                                            th(scope="col") Nome
+                                                            th(scope="col") Cognome
+                                                            th(scope="col") Codice fiscale
+                                                            th(scope="col") Città
+                                                            th(scope="col") Incarico
+                                                            th(scope="col") 
+
+                                                    tbody#filtered-users-list
+
+block js
+    script(src="../js/add-event.js")

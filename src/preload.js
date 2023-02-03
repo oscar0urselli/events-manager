@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld('db', {
     
     addEvent: (event) => ipcRenderer.invoke('addEvent', event),
     getEvents: () => ipcRenderer.invoke('getEvents'),
+    getEvent: (id) => ipcRenderer.invoke('getEvent', id),
     delEvent: (id) => ipcRenderer.invoke('delEvent', id),
     modifyEvent: (event) => ipcRenderer.invoke('modifyEvent', event),
     exportEventsView: (conditions) => ipcRenderer.invoke('exportEventsView', conditions)

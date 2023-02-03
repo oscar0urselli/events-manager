@@ -1,0 +1,46 @@
+extends index.pug
+
+block view_actions 
+    a(href="add-user.html" class="btn btn-primary btn-lg") Aggiungi volontario
+                        
+    button(type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#filter-selection") Filtra volontari
+    div#filter-selection(class="modal fade" tabindex="-1" aria-labelledby="filter-selection-title" aria-hidden="true")
+        div(class="modal-dialog")
+            div(class="modal-content")
+                div(class="modal-header")
+                    h1#filter-selection-title(class="modal-title fs-5") Filtra volontari
+                    button(type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close")
+                
+                div(class="modal-body")
+                    include includes/user/name-field.pug
+
+                    include includes/user/surname-field.pug
+
+                    include includes/user/user-status-select.pug
+                                        
+                    include includes/user/sex-select.pug
+
+                    include includes/user/role-select.pug
+
+                    include includes/user/city-select.pug
+
+                div(class="modal-footer" )
+                    button#confirm-search-user(class="w-100 btn btn-outline-success btn-lg" type="button" data-bs-dismiss="modal") Filtra volontari 
+                    a#export-users-view(href="../csv/users-view.csv" download="users-view.csv" class="w-100 btn btn-outline-info btn-lg") Esporta volontari
+
+block content
+    <div id="users-list" class="row row-cols-1 row-cols-xxl-3 g-4" style="padding-bottom: 5vh;"></div>
+                    
+    div(aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
+        div#confirm-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
+            div(class="toast-header text-bg-warning")
+                strong(class="fs-3 me-auto") ATTENZIONE
+            
+            div(class="toast-body")
+                p(class="fs-4") Confermi di voler eliminare il volontario?
+                div(class="mt-2 pt-2 border-top")
+                    a#del-user(href="users.html" class="btn btn-danger btn-lg") Elimina
+                    button(type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast") Chiudi
+                    
+block js
+    script(src="../js/get-users.js")

@@ -58,8 +58,10 @@ var viewEvent = undefined;
 const createWindow = () => {
     const win = new BrowserWindow({
         webPreferences: {
-            preload: path.join(__dirname, 'src/preload.js')
-        }
+            preload: path.join(__dirname, 'src/preload.js'),
+        },
+        //frame: false,
+        //autoHideMenuBar: true
     });
     
     ipcMain.handle('addUser', (event, user) => { return db_op.addUser(db, user); });

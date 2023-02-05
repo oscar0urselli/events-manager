@@ -1,0 +1,74 @@
+extends index.pug 
+
+block view_actions 
+    a(href="home.html" class="btn btn-outline-danger btn-lg") Torna indietro
+
+block content 
+    <div class="row">
+        div(class="col")
+        div(class="col-4 bg-body rounded shadow-lg")
+            label(class="col-form-label") Nome evento:
+            p#name(class="fs-3")
+        div(class="col")
+        div(class="col-7 bg-body rounded shadow-lg")
+            label(class="col-form-label") Descrizione:
+            p#description(class="fs-4")
+        div(class="col")
+    
+    div(class="row" style="padding-top: 2vh;")
+        div(class="col")
+        div(class="col-3 bg-body rounded shadow-lg")
+            label(class="col-form-label") Data inizio:
+            p#start_date(class="fs-3")
+        div(class="col")
+        div(class="col-2 bg-body rounded shadow-lg")
+            label(class="col-form-label") Orario inizio:
+            p#start_time(class="fs-3")
+        div(class="col")
+        div(class="col-3 bg-body rounded shadow-lg")
+            label(class="col-form-label") Data fine:
+            p#end_date(class="fs-3")
+        div(class="col")
+        div(class="col-2 bg-body rounded shadow-lg")
+            label(class="col-form-label") Orario fine:
+            p#end_time(class="fs-3")
+        div(class="col")
+    
+    div(class="row" style="padding-top: 2vh;")
+        div(class="col")
+        dic(class="col-4 bg-body rounded shadow-lg")
+            label(class="col-form-label") Luogo:
+            p#site(class="fs-4")
+        div(class="col")
+        div(class="col-7 bg-body rounded shadow-lg")
+            label(class="col-form-label") Note:
+            p#notes(class="fs-4")
+        div(class="col")
+    
+    div(class="row" style="padding-top: 5vh;")
+        div(class="col-1")
+        div(class="col-10 bg-body rounded shadow-lg text-center")
+            table(class="table")
+                thead
+                    tr
+                        th(scople="col") ID
+                        th(scople="col") Nome
+                        th(scople="col") Cognome
+                        th(scople="col") Codice fiscale
+                        th(scople="col") Città
+                        th(scople="col") Incarico
+                        th(scople="col") Presenza
+
+                tbody#added-users-table(class="table-group-divider")
+        
+        div(class="col-1")
+    
+    div(class="row" style="padding-top: 3vh;")
+        div(class="col-1")
+        div(class="col pt-3 pb-5")
+            a#done-info-event(href="home.html" class="w-100 btn btn-primary btn-lg" type="button") Fatto
+        
+        div(class="col-1")
+
+block js 
+    script(src="../js/info-event.js")

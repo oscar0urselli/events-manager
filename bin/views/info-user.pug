@@ -1,0 +1,53 @@
+extends index.pug 
+
+block view_actions 
+    a(href="users.html" class="btn btn-outline-danger btn-lg") Torna indietro
+
+block content
+    div(class="row")
+        div(class="col")
+        div(class="col-4 bg-body rounded shadow-lg")
+            label(class="col-form-label") Nome e cognome:
+            p#name(class="fs-3")
+        div(class="col")
+        div(class="col-7 bg-body rounded shadow-lg")
+            label(class="col-form-label") Data di nascita:
+            p#birthday(class="fs-4")
+        div(class="col")
+    
+    div(class="row" style="padding-top: 2vh;")
+        div(class="col")
+        div(class="col-3 bg-body rounded shadow-lg")
+            label(class="col-form-label") Codice fiscale:
+            p#cf(class="fs-3")
+        div(class="col")
+        div(class="col-2 bg-body rounded shadow-lg")
+            label(class="col-form-label") Sesso:
+            p#sex(class="fs-3")
+        div(class="col")
+        div(class="col-3 bg-body rounded shadow-lg")
+            label(class="col-form-label") Comune di residenza:
+            p#city(class="fs-3")
+        div(class="col")
+        div(class="col-2 bg-body rounded shadow-lg")
+            label(class="col-form-label") Ruolo:
+            p#role(class="fs-3")
+        div(class="col")
+    
+    div(class="row" style="padding-top: 5vh;")
+        div(class="col-1")
+        div(class="col-10 bg-body rounded shadow-lg text-center")
+            table(class="table")
+                thead
+                    tr
+                        th(scope="col") ID
+                        th(scope="col") Nome evento
+                        th(scope="col") Luogo
+                        th(scope="col") Data inizio
+                        th(scope="col") Data fine
+                    
+                tbody#events-table(class="table-group-divider")
+        div(class="col-1")
+    
+block js
+    script(src="../js/info-user.js")

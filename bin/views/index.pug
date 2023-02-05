@@ -66,44 +66,35 @@ html
             symbol#geo-fill(viewBox="0 0 16 16")
                 path(fill-rule="evenodd" d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z")
 
-            div(class="row")
-                div(class="col-1")
-                div(class="col-2")
-                    div(class="my-3 p-3 bg-body rounded shadow-lg" style="height: 95vh;")
-                        div(class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none")
-                            svg(class="bi pe-none me-2" width="40" height="32")
-                                use(xlink:href="#bootstrap")
+        div(class="row")
+            div(class="col-1")
+            div(class="col-2")
+                div(class="position-relative my-3 p-3 bg-body rounded shadow-lg" style="height: 95vh;")
+                    div(class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none")
+                        svg(class="bi pe-none me-2" width="40" height="32")
+                            use(xlink:href="#bootstrap")
                             
-                            span(class="fs-4") Gestore eventi
+                        span(class="fs-4") Gestore eventi
                         
-                        hr
-                        ul#sections(class="nav nav-pills flex-column mb-auto")
-                        //    li(class="nav-item")
-                                a(href="home.html" class="nav-link active" aria-current="page")
-                                    svg(class="bi pe-none me-2" width="16" height="16")
-                                        use(xlink:href="#home")
-                                    Home
+                    hr
+                    ul#sections(class="nav nav-pills flex-column mb-auto")
+                    hr
+                    div(class="position-absolute bottom-0 d-flex align-items-center ps-2 pb-5 link-dark text-decoration-none")
+                        a(class="btn btn-primary btn-floating" style="background-color: #000000;" href="https://github.com/oscar0urselli" target="_blank")
+                            svg(xmlns="http://www.w3.org/2000/svg" width="16" height="24" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16")
+                                path(d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z")
                             
-                            li(class="nav-item")
-                                a(href="events.html" class="nav-link link-dark")
-                                    svg(class="bi pe-none me-2" width="16" height="16")
-                                        use(xlink:href="#table")
-                                    Eventi
-                                
-                            li(class="nav-item")
-                                a(href="users.html" class="nav-link link-dark")
-                                    svg(class="bi pe-none me-2" width="16" height="16")
-                                        use(xlink:href="#people-circle")
-                                    Volontari
-                        hr
-                div(class="col-8")
-                    div(class="my-3 p-3 bg-body rounded shadow-lg")
-                        h2(class="border-bottom pb-2 mb-3") #{view_title}
-                        block view_actions
+                        span(class="ps-3")
+                            a(class="link-dark" href="https://oscarurselli.com/" target="_blank")
+                                strong(class="text-black") Made by Oscar Urselli
+            div(class="col-8")
+                div(class="my-3 p-3 bg-body rounded shadow-lg")
+                    h2(class="border-bottom pb-2 mb-3") #{view_title}
+                    block view_actions
 
-                    block content
+                block content
 
         script(src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")
         script(src="../../node_modules/jquery/dist/jquery.min.js")
-        script(src="../navbar.js")
+        script(src="../js/navbar.js")
         block js

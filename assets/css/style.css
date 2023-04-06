@@ -1,0 +1,15 @@
+#drag-region {
+    -webkit-app-region: drag;
+}
+
+#minimize-btn {
+    -webkit-app-region: no-drag;
+}
+
+#fullscreen-toggle {
+    -webkit-app-region: no-drag;
+}
+
+#close-btn {
+    -webkit-app-region: no-drag;
+}

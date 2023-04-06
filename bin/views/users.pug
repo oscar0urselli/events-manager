@@ -1,7 +1,7 @@
 extends index.pug
 
 block view_actions 
-    a(href="add-user.html" class="btn btn-primary btn-lg") Aggiungi volontario
+    a(href="add-user.html" class="btn btn-primary btn-lg me-3") Aggiungi volontario
                         
     button(type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#filter-selection") Filtra volontari
     div#filter-selection(class="modal fade" tabindex="-1" aria-labelledby="filter-selection-title" aria-hidden="true")
@@ -29,7 +29,7 @@ block view_actions
                     a#export-users-view(href="../csv/users-view.csv" download="users-view.csv" class="w-100 btn btn-outline-info btn-lg") Esporta volontari
 
 block content
-    <div id="users-list" class="row row-cols-1 row-cols-xxl-3 g-4" style="padding-bottom: 5vh;"></div>
+    div(id="users-list" class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 gx-2" style="padding-bottom: 5vh;")
                     
     div(aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
         div#confirm-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
@@ -39,7 +39,7 @@ block content
             div(class="toast-body")
                 p(class="fs-4") Confermi di voler eliminare il volontario?
                 div(class="mt-2 pt-2 border-top")
-                    a#del-user(href="users.html" class="btn btn-danger btn-lg") Elimina
+                    a#del-user(href="users.html" class="btn btn-danger btn-lg me-3") Elimina
                     button(type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast") Chiudi
                     
 block js

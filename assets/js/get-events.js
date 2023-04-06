@@ -35,8 +35,8 @@ window.addEventListener('load', async () => {
                     <li class="list-group-item">Fine: ${new Date(e.end_datetime).toLocaleString('it-IT')}</li>
                 </ul>
                 <div class="card-body">
-                    <a id="modify-event-${e.id}" href="modify-event.html" class="btn btn-primary btn-lg">Modifica</a>
-                    <button type="button" id="del-event-${e.id}" class="btn btn-danger btn-lg">Elimina</button>
+                    <a id="modify-event-${e.id}" href="modify-event.html" class="btn btn-primary me-3">Modifica</a>
+                    <button type="button" id="del-event-${e.id}" class="btn btn-danger">Elimina</button>
                 </div>
             </div>
         </div>
@@ -115,8 +115,8 @@ $('#confirm-search-event').on('click', () => {
                             <li class="list-group-item">Fine: ${new Date(e.end_datetime).toLocaleString('it-IT')}</li>
                         </ul>
                         <div class="card-body">
-                            <a id="modify-event-${e.id}" href="modify-event.html" class="btn btn-primary btn-lg">Modifica</a>
-                            <button type="button" id="del-event-${e.id}" class="btn btn-danger btn-lg">Elimina</button>
+                            <a id="modify-event-${e.id}" href="modify-event.html" class="btn btn-primary me-3">Modifica</a>
+                            <button type="button" id="del-event-${e.id}" class="btn btn-danger">Elimina</button>
                         </div>
                     </div>
                 </div>

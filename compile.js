@@ -12,7 +12,8 @@ const views = {
     info_event: {src: path.join(__dirname, 'bin/views/info-event.pug'), dest: path.join(__dirname, 'assets/html/info-event.html'), locals: {view_title: 'Informazioni evento'}},
     info_user: {src: path.join(__dirname, 'bin/views/info-user.pug'), dest: path.join(__dirname, 'assets/html/info-user.html'), locals: {view_title: 'Informazioni volontario'}},
     modify_event: {src: path.join(__dirname, 'bin/views/modify-event.pug'), dest: path.join(__dirname, 'assets/html/modify-event.html'), locals: {view_title: 'Modifica evento'}},
-    modify_user: {src: path.join(__dirname, 'bin/views/modify-user.pug'), dest: path.join(__dirname, 'assets/html/modify-user.html'), locals: {view_title: 'Modifica volontario'}}
+    modify_user: {src: path.join(__dirname, 'bin/views/modify-user.pug'), dest: path.join(__dirname, 'assets/html/modify-user.html'), locals: {view_title: 'Modifica volontario'}},
+    settings: {src: path.join(__dirname, 'bin/views/settings.pug'), dest: path.join(__dirname, 'assets/html/settings.html'), locals: {view_title: 'Impostazioni'}},
 };
 
 

@@ -1,6 +1,6 @@
 {
   "name": "events-manager",
-  "version": "0.3.1-alpha",
+  "version": "0.4.0",
   "description": "Events manager.",
   "main": "main.js",
   "scripts": {
@@ -24,9 +24,13 @@
   "dependencies": {
     "better-sqlite3": "^8.0.1",
     "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.3",
     "csv": "^6.2.5",
     "electron-squirrel-startup": "^1.0.0",
+    "flag-icons": "^6.6.6",
+    "i18next": "^22.4.14",
     "jquery": "^3.6.3",
+    "jquery-i18next": "^1.2.1",
     "sqlite3": "^5.1.4"
   }
 }

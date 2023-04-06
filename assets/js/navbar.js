@@ -1,19 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Some way to detect selected language
-
-    let sections = [['home.html', 'Home', 'home'], ['events.html', 'Eventi', 'table'], ['users.html', 'Utenti', 'people-circle']];
     let fileName = window.location.pathname.split('/').pop();
 
-    sections.forEach((s) => {
-        $('#sections').append(`
-            <li class="nav-item">
-                <a href="${s[0]}" class="nav-link ${s[0] === fileName ? 'active' : 'link-dark'}" aria-current="page">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#${s[2]}" />
-                    </svg>
-                    ${s[1]}
-                </a>
-            </li>
-        `);
-    });
+    $('#home-section').removeClass('link-dark');
+    $('#events-section').removeClass('link-dark');
+    $('#users-section').removeClass('link-dark');
+    $('#settings-section').removeClass('link-dark');
+
+    if (fileName === 'home.html') {
+        $('#home-section').addClass('active');
+        $('#events-section').addClass('link-dark');
+        $('#users-section').addClass('link-dark');
+        $('#settings-section').addClass('link-dark');
+    }
+    else if (fileName === 'events.html') {
+        $('#home-section').addClass('link-dark');
+        $('#events-section').addClass('active');
+        $('#users-section').addClass('link-dark');
+        $('#settings-section').addClass('link-dark');
+    }
+    else if (fileName === 'users.html') {
+        $('#home-section').addClass('link-dark');
+        $('#events-section').addClass('link-dark');
+        $('#users-section').addClass('active');
+        $('#settings-section').addClass('link-dark');
+    }
+    else if (fileName === 'settings.html') {
+        $('#home-section').addClass('link-dark');
+        $('#events-section').addClass('link-dark');
+        $('#users-section').addClass('link-dark');
+        $('#settings-section').addClass('active');
+    }
 });

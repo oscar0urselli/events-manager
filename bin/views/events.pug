@@ -1,7 +1,7 @@
 extends index.pug
 
 block view_actions
-    a(href="add-event.html" class="btn btn-primary btn-lg") Aggiungi evento
+    a(href="add-event.html" class="btn btn-primary btn-lg me-3") Aggiungi evento
     
     button(type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#filter-selection") Filtra eventi
     div#filter-selection(class="modal fade" tabindex="-1" aria-labelledby="filter-selection-title" aria-hidden="true")
@@ -43,7 +43,7 @@ block content
             div(class="toast-body")
                 p(class="fs-4") Confermi di voler eliminare l'evento?
                 div(class="mt-2 pt-2 border-top")
-                    a#del-event(href="events.html" class="btn btn-danger btn-lg") Elimina
+                    a#del-event(href="events.html" class="btn btn-danger btn-lg me-3") Elimina
                     button(type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast") Chiudi
 
 block js

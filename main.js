@@ -3,6 +3,7 @@ const fs = require('fs');
 const { app, BrowserWindow, ipcMain } = require('electron');
 const Database = require('better-sqlite3'); //require('sqlite3').verbose();
 const db_op = require('./src/db-op');
+const menu = require('./src/menu-function');
 
 if (require('electron-squirrel-startup')) app.quit();
 
@@ -57,12 +58,14 @@ var viewEvent = undefined;
 
 const createWindow = () => {
     const win = new BrowserWindow({
+        width: 1200,
+        height: 800,
         webPreferences: {
             preload: path.join(__dirname, 'src/preload.js'),
         },
-        //frame: false,
-        //autoHideMenuBar: true
+        frame: false
     });
+
     
     ipcMain.handle('addUser', (event, user) => { return db_op.addUser(db, user); });
     ipcMain.handle('getUsers', (event) => { return db_op.getUsers(db); });
@@ -82,6 +85,60 @@ const createWindow = () => {
 
     ipcMain.handle('viewUserInfo', (event, user) => { let u = viewUser; viewUser = user; return u; });
     ipcMain.handle('viewEventInfo', (event, e) => { let ev = viewEvent; viewEvent = e; return ev; });
+
+    ipcMain.handle('exportDB', async (event) => {
+        let res;
+        await db.backup(path.join(__dirname, 'src/backup-database.db'))
+        .then(() => {
+            console.log('Backup completed.');
+            res = 'ok';
+        })
+        .catch((err) => {
+            console.error('Backup failed', err);
+            res = 'no';
+        });
+        console.log(res);
+        return res;
+    });
+    ipcMain.handle('importDB', async (event, DBpath) => {
+        try {
+            await db.backup(path.join(__dirname, 'src/backup-database.db'));
+
+            await db.close();
+
+            fs.copyFileSync(DBpath, path.join(__dirname, '/database.db'));
+            db = new Database(path.join(__dirname, './database.db'), { fileMustExist: true, verbose: console.log });
+            db.pragma('journal_mode = WAL');
+
+            return 'ok';
+        }
+        catch (err) {
+            fs.copyFileSync(path.join(__dirname, 'src/backup-database.db'), path.join(__dirname, './database.db'));
+            db = new Database(path.join(__dirname, './database.db'), { verbose: console.log });
+            db.pragma('journal_mode = WAL');
+
+            return 'no';
+        }
+    });
+
+    // Window frame functions
+    ipcMain.handle('closeWindow', (event) => { win.close() });
+    ipcMain.handle('maxUnmaxWindow', (event) => {
+        if (win.isMaximized()) {
+            win.unmaximize();
+        }
+        else {
+            win.maximize();
+        }
+    });
+    ipcMain.handle('minimizeWindow', (event) => {
+        if (win.maximizable) {
+            win.maximize();
+        }
+        if (win.minimizable) {
+            win.minimize();
+        }
+    });
 
     win.loadFile(path.join(__dirname, '/assets/html/home.html'));
 }
@@ -107,14 +164,10 @@ app.on('window-all-closed', () => {
             console.log('Backup failed', err);
         })
         .finally(() => {
-            if (process.platform !== 'darwin') app.quit();
+            db.close();
+
+            if (process.platform !== 'darwin') {
+                app.quit();
+            }
         });
-});
-
-app.on('before-quit', () => {
-    db.close((err) => {
-        if (err) return console.error(err.message);
-
-        console.log('Close the database connection.');
-    });
 });

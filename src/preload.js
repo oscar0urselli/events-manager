@@ -15,9 +15,17 @@ contextBridge.exposeInMainWorld('db', {
     getEvent: (id) => ipcRenderer.invoke('getEvent', id),
     delEvent: (id) => ipcRenderer.invoke('delEvent', id),
     modifyEvent: (event) => ipcRenderer.invoke('modifyEvent', event),
-    exportEventsView: (conditions) => ipcRenderer.invoke('exportEventsView', conditions)
+    exportEventsView: (conditions) => ipcRenderer.invoke('exportEventsView', conditions),
+
+    exportDB: () => ipcRenderer.invoke('exportDB'),
+    importDB: (DBpath) => ipcRenderer.invoke('importDB', DBpath)
 });
 contextBridge.exposeInMainWorld('misc', {
     viewUserInfo: (user) => ipcRenderer.invoke('viewUserInfo', user),
     viewEventInfo: (e) => ipcRenderer.invoke('viewEventInfo', e)
+});
+contextBridge.exposeInMainWorld('windowFrame', {
+    closeWindow: () => ipcRenderer.invoke('closeWindow'),
+    maxUnmaxWindow: () => ipcRenderer.invoke('maxUnmaxWindow'),
+    minimizeWindow: () => ipcRenderer.invoke('minimizeWindow')
 });

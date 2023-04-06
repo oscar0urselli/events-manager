@@ -15,7 +15,7 @@ window.addEventListener('load', async (event) => {
         
         $('#users-list').append(`
         <div id="user-${u.id}" class="col">
-            <div class="card text-center shadow-lg h-100" style="width: 18rem;">
+            <div class="card text-center shadow-lg h-100" style="width: 16rem;">
                 <img src="../../${u.pic}" class="card-img-top img-thumbnail">
                 <div class="card-body">
                     <h5 class="card-title"><a id="info-user-${u.id}" href="info-user.html">${u.name} ${u.surname}</a></h5>
@@ -28,8 +28,8 @@ window.addEventListener('load', async (event) => {
                     <li class="list-group-item">${status}</li>
                 </ul>
                 <div class="card-body">
-                    <a id="modify-user-${u.id}" href="modify-user.html" class="btn btn-primary btn-lg">Modifica</a>
-                    <button type="button" id="del-user-${u.id}" class="btn btn-danger btn-lg">Elimina</button>
+                    <a id="modify-user-${u.id}" href="modify-user.html" class="btn btn-primary me-3">Modifica</a>
+                    <button type="button" id="del-user-${u.id}" class="btn btn-danger">Elimina</button>
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@ $('#confirm-search-user').on('click', () => {
 
             $('#users-list').append(`
             <div id="user-${u.id}" class="col">
-                <div class="card text-center shadow-lg h-100" style="width: 18rem;">
+                <div class="card text-center shadow-lg h-100" style="width: 16rem;">
                     <img src="../../${u.pic}" class="card-img-top img-thumbnail">
                     <div class="card-body">
                         <h5 class="card-title"><a id="info-user-${u.id}" href="info-user.html">${u.name} ${u.surname}</a></h5>
@@ -129,9 +129,8 @@ $('#confirm-search-user').on('click', () => {
                         <li class="list-group-item">${status}</li>
                     </ul>
                     <div class="card-body">
-                        <a id="modify-user-${u.id}" href="modify-user.html" class="btn btn-primary btn-lg">Modifica</a>
-                        <a id="info-user-${u.id}" href="info-user.html" class="btn btn-info btn-lg">Informazioni</a>
-                        <button type="button" id="del-user-${u.id}" class="btn btn-danger btn-lg">Elimina</button>
+                        <a id="modify-user-${u.id}" href="modify-user.html" class="btn btn-primary me-3">Modifica</a>
+                        <button type="button" id="del-user-${u.id}" class="btn btn-danger">Elimina</button>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,47 @@
+extends index.pug
+
+block view_actions
+    div(class="btn-group" role="group")
+        //input#btn-preferences(type="radio" class="btn-check" name="btnradio" autocomplete="off" checked)
+        //label(class="btn btn-outline-primary" for="btn-preferences") Preferenze
+
+        input#btn-advanced(type="radio" class="btn-check" name="btnradio" autocomplete="off" checked)
+        label(class="btn btn-outline-primary" for="btn-advanced") Avanzate
+
+block content
+    div#live-alert-placeholder
+    //div#preferences(class="my-3 me-3 p-5 bg-body rounded shadow-lg" style="height: 66vh;")
+        div(class="row")
+            div(class="col")
+                h3(class="pb-2 mb-3") Lingua:
+            div(class="col-3")
+                select(class="form-select")
+                    option(value="it" selected) Italiano
+                    option(value="en") English
+            div(class="col-6")
+
+    div#advanced(class="my-3 me-3 p-5 bg-body rounded shadow-lg" style="height: 66vh;")
+        div(class="row pb-2 mb-5")
+            div(class="col")
+                a#export-database(href="../../src/backup-database.db" download="database.db" class="w-100 btn btn-success btn-lg") Esporta database
+        div(class="row pt-5 mt-5")
+            div(class="col")
+                h3(class="pb-2 mb-3") Importa database
+                div(class="input-group")
+                    input#database(type="file" class="form-control" accept=".db" aria-label="Upload")
+                    button#import-database-btn(class="btn btn-danger" type="button") Importa database
+
+    div(aria-live="assertive" aria-atomic="true" class="d-flex position-absolute top-50 start-50 translate-middle")
+        div#confirm-toast(class="toast" role="alert" aria-live="assertive" aria-atomic="true")
+            div(class="toast-header text-bg-danger")
+                strong(class="fs-3 me-auto") ATTENZIONE
+            
+            div(class="toast-body")
+                p(class="fs-4") Confermi di voler importare questo database?
+                strong(class="fs-3") L'operazione è irreversibile
+                div(class="mt-2 pt-2 border-top")
+                    button#confirm-btn(class="me-3 btn btn-danger btn-lg"  data-bs-dismiss="toast") Importa
+                    button(type="button" class="btn btn-primary btn-lg" data-bs-dismiss="toast") Chiudi
+      
+block js
+    script(src="../js/settings.js") 
